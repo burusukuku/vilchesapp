@@ -137,7 +137,7 @@ $(document).ready(function(){
 		<a href=""><i class="entypo-users"></i><span>Clientes</span></a>
             <ul>
             		<li>
-            			<a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-search"></i><span>Ver Clientes</span></a>
+            			<a href="{{URL::route('clientes.index')}}"><i class="entypo-search"></i><span>Ver Clientes</span></a>
             		</li>
             		<li>
                         <a href="{{URL::route('clientes.crear')}}"><i class="entypo-plus"></i><span>Añadir Cliente</span></a>
