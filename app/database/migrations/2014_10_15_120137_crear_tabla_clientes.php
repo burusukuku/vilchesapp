@@ -39,10 +39,8 @@ class CrearTablaClientes extends Migration {
      */
     public function down()
     {
-        Schema::table('menu',function($table){
-           $table->dropUnique('menu_numero_tipo_unique');
-        });
-        Schema::drop('menu');
+
+        Schema::drop('clientes');
     }
 
 }

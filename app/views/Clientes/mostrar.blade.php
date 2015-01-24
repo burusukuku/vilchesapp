@@ -14,6 +14,7 @@
 @stop
 
 @section('contenido')
+
 <h1>Ficha Cliente</h1>
 <div class="row">
 	<div class="col-md-12">
@@ -38,6 +39,14 @@
                      "role" => "form",
                      "class" => "form-horizontal",
                     ))}}
+
+                    <?php
+
+                            echo $errors->first("nombredocumento", "<div class='error mensajes'>{$errors->first('nombredocumento')}</div>");
+                            echo $errors->first("documento", "<div class='error mensajes'>{$errors->first('documento')}</div>");
+                            echo $errors->first("ruta", "<div class='error mensajes'>{$errors->first('ruta')}</div>");
+                        ?>
+
 
 					<div class="form-group">
 
@@ -118,39 +127,55 @@
                                  "role" => "form",
                                  "class" => "form-horizontal",
                                 ))}}
-			    <label class="col-sm-3 control-label">Subir nuevo documento</label>
+                <label class="col-sm-3 control-label">Nombre del documento</label>
+                <div class="col-sm-3">
+                {{Form::input("text", "nombredocumento", null, array("class" => "form-control", "placeholder"=>"Nombre documento", "id"=>"field-1"))}}
+                </div>
 			    <div class="col-sm-5">
-
-
-			        {{Form::file('documento', ['class' => 'file-input-wrapper btn form-control file2 inline btn btn-primary' , 'data-label'=>'<i class="glyphicon glyphicon-file"></i> Buscar' ]);}}
+                {{Form::file('documento', ['class' => 'file-input-wrapper btn form-control file2 inline btn btn-primary' , 'data-label'=>'<i class="glyphicon glyphicon-file"></i> Buscar' ]);}}
 			        {{Form::input("hidden", "_token", csrf_token())}}
 			        {{Form::input("hidden", "id", $clientes->id)}}
-                    {{Form::input("submit", null, "Subir documento", array("class" => "btn btn-default"))}}
+			        </div>
+			        <br>
+                    {{Form::input("submit", null, "Subir documento", array("class" => "btn btn-default", "align"=>"center"))}}
 
 
 			        {{Form::close()}}
 
+
 			    </div>
 			    <?
-			    $ruta="./documentos/".$clientes->id;
-			    echo $ruta;
+
+
+			    $ruta="./documentos/".$clientes->id."";
+			    if(is_dir ($ruta)==true){
 			    if ($dh = opendir($ruta)) {
                          while (($file = readdir($dh)) !== false) {
-                            //esta línea la utilizaríamos si queremos listar todo lo que hay en el directorio
-                            //mostraría tanto archivos como directorios
-                            //echo "<br>Nombre de archivo: $file : Es un: " . filetype($ruta . $file);
-                            if (is_dir($ruta . $file) && $file!="." && $file!=".."){
-                               //solo si el archivo es un directorio, distinto que "." y ".."
-                               echo "<br>Directorio: $ruta$file";
-                               listar_directorios_ruta($ruta . $file . "/");
-                            }
+                             if ($file!="." && $file!=".."){
+
+
+                                foreach ($documentos as $documento)
+                                    {
+                                        if($documento->ruta == $file){
+                                        echo "<div class='form-group'>";
+                                        $date = new DateTime($documento->created_at);
+                                        $fecha=$date->format('d/m/Y');
+                                        echo "<div class='col-sm-6'><strong>Documento:</strong> ".$documento->nombredocumento." <br> <strong>Archivo:</strong> ".$file.  " <br> <strong>Creado: </strong>".$fecha." </div>
+                                        <div class='col-sm-2'><a href=".URL::route('clientes.eliminardocumento', array('id' => $documento->id ))."><button type='button' class='btn btn-success'> <i class='entypo-down'></i>Descargar </button></a></div>
+                                        <div class='col-sd-4'><a href=".URL::route('clientes.eliminardocumento', array('id' => $documento->id ))."><button type='button' class='btn btn-white'> <i class='entypo-trash'></i>Eliminar </button></a></div><br>";
+                                        echo "</div>";
+                                        }
+                                    }
+
+                             }
                          }
                       closedir($dh);
                       }
+                }
                       ?>
-			</div>
 
-			</div>
+
+
 
 		</div>
 

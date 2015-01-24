@@ -28,11 +28,12 @@ Route::group(array('before' => 'auth_user'), function() {
     Route::get('/clientes',array('as' => 'clientes.index', 'uses' => 'ClientesController@index'));
     Route::get('/clientes/crear',array('as' => 'clientes.crear', 'uses' => 'ClientesController@crear'));
     Route::post('/clientes',array('as' => 'clientes.guardar', 'uses' => 'ClientesController@guardar'));
-    Route::post('/clientes', array('as' => 'clientes.subirdocumento', 'uses' => 'ClientesController@subirdocumento'));
+    Route::post('/clientes/documento', array('as' => 'clientes.subirdocumento', 'uses' => 'ClientesController@subirdocumento'));
     Route::get('/clientes/editar/{id}', array('as' => 'clientes.editar', 'uses' => 'ClientesController@editar'));
     Route::get('/clientes/mostrar/{id}', array('as' => 'clientes.mostrar', 'uses' => 'ClientesController@mostrar'));
     Route::post('/clientes/actualizar', array('as' => 'clientes.actualizar', 'uses' => 'ClientesController@actualizar'));
     Route::get('/clientes/eliminar/{id}', array('as' => 'clientes.eliminar', 'uses' => 'ClientesController@eliminar'));
+    Route::get('/clientes/documento/eliminar/{id}', array('as' => 'clientes.eliminardocumento', 'uses' => 'ClientesController@eliminardocumento'));
     Route::get('/clientespdf', array('as' => 'clientespdf', 'uses' => 'ClientesController@clientespdf'));
 
     Route::get('/',array('as' => 'index', 'uses' => 'HomeController@index'));

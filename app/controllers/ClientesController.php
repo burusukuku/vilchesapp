@@ -19,7 +19,8 @@ class ClientesController extends BaseController {
     {
 
         $clientes =  Clientes::find($id);
-        return View::make('clientes.mostrar', array('clientes' => $clientes));
+        $documentos = Documentos::all();
+        return View::make('clientes.mostrar', array('clientes' => $clientes, 'documentos' => $documentos));
     }
     
     public function guardar()
@@ -39,7 +40,7 @@ class ClientesController extends BaseController {
         $messages = array(
             "dni.required" => "El campo dni es requerido",
             "dni.unique" => "El campo dni ya existe en la base de datos",
-            "nombre.required" => "El campo nombre es requerido",
+            "nombre.required" => "El campo nombre del documento es requerido",
             "apell1.required" => "El campo 1º apellido es requerido",
             "apell2.required" => "El campo 2º apellido es requerido",
             "telefono.required" => "El campo telefono es requerido",
@@ -77,15 +78,49 @@ class ClientesController extends BaseController {
 
     public function subirdocumento()
     {
-        $file = Input::file("documento");
-        $id= Input::get('id');
-        $frase="documentos/".$id;
-        $file->move($frase,$file->getClientOriginalName());
+        $ruta = Input::file("documento")->getClientOriginalName();
 
-        return Redirect::action('ClientesController@mostrar',array('id' => $id));
+        $rules = array(
+            "nombredocumento" => "required",
+            "documento" => "required|unique:documentos,ruta",
+        );
 
+        $messages = array(
+            "nombredocumento.required" => "El campo nombre es requerido",
+            "documento.required" => "El campo documento es requerido",
+        );
+
+        $validator = Validator::make(Input::All(), $rules, $messages);
+        if ($validator->passes()) {
+            $id = Input::get("id");
+            $file = Input::file("documento");
+
+            $documentos = Documentos::create(array(
+                'idcliente' => Input::get('id'),
+                'nombredocumento' => Input::get('nombredocumento'),
+                'ruta' => $ruta,
+            ));
+
+            $file->move("documentos/" . $id, $file->getClientOriginalName());
+            $documentos = Documentos::all();
+            Event::fire('auditoria', array($documentos->last()->id, Auth::user()->get()->user, $documentos->last(), 'Documentos', 'Alta'));
+            return Redirect::action('ClientesController@mostrar', array('id' => $id));
+        } else {
+            return Redirect::back()->withinput()->withErrors($validator);
+        }
+    }
+
+        public function eliminardocumento($id)
+    {
+        Event::fire('auditoria', array($id, Auth::user()->get()->user, Documentos::find($id), 'Documentos', 'Baja'));
+        $documento=Documentos::find($id);
+        $idcliente=$documento->idcliente;
+        Documentos::find($id)->delete();
+        File::delete('documentos/'.$idcliente.'/'.$documento->ruta);
+        return Redirect::action('ClientesController@mostrar',array('id' => $idcliente));
+    }
 
     }
 
 
-}
+
