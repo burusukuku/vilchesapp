@@ -14,5 +14,5 @@ class Documentos extends Eloquent  {
      *
      * @var array
      */
-    protected $fillable = array('nombredocumento', 'ruta');
+    protected $fillable = array('idcliente','nombredocumento', 'ruta');
 }
