@@ -35,6 +35,7 @@ Route::group(array('before' => 'auth_user'), function() {
     Route::get('/clientes/eliminar/{id}', array('as' => 'clientes.eliminar', 'uses' => 'ClientesController@eliminar'));
     Route::get('/clientes/documento/eliminar/{id}', array('as' => 'clientes.eliminardocumento', 'uses' => 'ClientesController@eliminardocumento'));
     Route::get('/clientespdf', array('as' => 'clientespdf', 'uses' => 'ClientesController@clientespdf'));
+    Route::get('/descargar/{id}', array('as' => 'clientes.descargar', 'uses' => 'ClientesController@descargar'));
 
     Route::get('/',array('as' => 'index', 'uses' => 'HomeController@index'));
     Route::get('/salir', array('as' => 'salir', 'uses' => 'HomeController@salir'));

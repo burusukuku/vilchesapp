@@ -32,16 +32,17 @@
                                         "role" => "form",
                                         "class" => "form-horizontal",
                                         ))}}
-                        <?php
-
-                            echo $errors->first("nombre", "<div class='error mensajes'>{$errors->first('nombre')}</div>");
-                            echo $errors->first("dni", "<div class='error mensajes'>{$errors->first('dni')}</div>");
-                            echo $errors->first("apell1", "<div class='error mensajes'>{$errors->first('apell1')}</div>");
-                            echo $errors->first("apell2", "<div class='error mensajes'>{$errors->first('apell2')}</div>");
-                            echo $errors->first("fecha_nac", "<div class='error mensajes'>{$errors->first('fecha_nac')}</div>");
-                            echo $errors->first("direccion", "<div class='error mensajes'>{$errors->first('direccion')}</div>");
-                            echo $errors->first("localidad", "<div class='error mensajes'>{$errors->first('localidad')}</div>");
-                        ?>
+                        @if ($errors->any())
+                            <div class="error mensajes">
+                              <button type="button" class="close" data-dismiss="alert">&times;</button>
+                              <strong>Por favor corrige los siguentes errores:</strong>
+                              <ul>
+                              @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                              @endforeach
+                              </ul>
+                            </div>
+                         @endif
 					<div class="form-group">
 
 						<label for="field-1" class="col-sm-2 control-label">Dni: </label>

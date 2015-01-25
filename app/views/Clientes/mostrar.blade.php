@@ -40,12 +40,18 @@
                      "class" => "form-horizontal",
                     ))}}
 
-                    <?php
 
-                            echo $errors->first("nombredocumento", "<div class='error mensajes'>{$errors->first('nombredocumento')}</div>");
-                            echo $errors->first("documento", "<div class='error mensajes'>{$errors->first('documento')}</div>");
-                            echo $errors->first("ruta", "<div class='error mensajes'>{$errors->first('ruta')}</div>");
-                        ?>
+                    @if ($errors->any())
+                        <div class="error mensajes">
+                          <button type="button" class="close" data-dismiss="alert">&times;</button>
+                          <strong>Por favor corrige los siguentes errores:</strong>
+                          <ul>
+                          @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                          @endforeach
+                          </ul>
+                        </div>
+                      @endif
 
 
 					<div class="form-group">
@@ -106,6 +112,12 @@
 
 	</div>
 </div>
+@if(Session::has('exito'))
+            <div class="exito mensajes">{{ Session::get('exito') }}</div>
+     @endif
+@if(Session::has('error'))
+            <div class="error mensajes">{{ Session::get('error') }}</div>
+     @endif
 <div class="row">
 	<div class="col-md-12">
 <div class="panel panel-primary" data-collapsed="0">
@@ -147,7 +159,7 @@
 			    <?
 
 
-			    $ruta="./documentos/".$clientes->id."";
+			    $ruta="./documentos/".$clientes->id."/";
 			    if(is_dir ($ruta)==true){
 			    if ($dh = opendir($ruta)) {
                          while (($file = readdir($dh)) !== false) {
@@ -156,12 +168,12 @@
 
                                 foreach ($documentos as $documento)
                                     {
-                                        if($documento->ruta == $file){
+                                        if($documento->ruta == $file && $documento->idcliente == $clientes->id){
                                         echo "<div class='form-group'>";
                                         $date = new DateTime($documento->created_at);
                                         $fecha=$date->format('d/m/Y');
                                         echo "<div class='col-sm-6'><strong>Documento:</strong> ".$documento->nombredocumento." <br> <strong>Archivo:</strong> ".$file.  " <br> <strong>Creado: </strong>".$fecha." </div>
-                                        <div class='col-sm-2'><a href=".URL::route('clientes.eliminardocumento', array('id' => $documento->id ))."><button type='button' class='btn btn-success'> <i class='entypo-down'></i>Descargar </button></a></div>
+                                        <div class='col-sm-2'><a href=".URL::route('clientes.descargar', array('id' => $documento->id ))."><button type='button' class='btn btn-success'> <i class='entypo-down'></i>Descargar </button></a></div>
                                         <div class='col-sd-4'><a href=".URL::route('clientes.eliminardocumento', array('id' => $documento->id ))."><button type='button' class='btn btn-white'> <i class='entypo-trash'></i>Eliminar </button></a></div><br>";
                                         echo "</div>";
                                         }

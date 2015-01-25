@@ -20,7 +20,7 @@ class CrearTablaDocumentos extends Migration {
             $table->string('nombredocumento');
             $table->string('ruta');
 
-            $table->unique(array('ruta'));
+            $table->unique(array('ruta', 'idcliente'));
 
             $table->timestamps();
         });
