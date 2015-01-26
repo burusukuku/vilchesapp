@@ -17,13 +17,11 @@
 <div class="col-xs-6 col-left"><h3>Ver Clientes</h3></div>
 <div class="col-xs-6 col-right"><p class="text-right"><a href="{{URL::route('clientespdf')}}" class="btn btn-red" target="_blank"><i class="entypo-download"></i> Descargar en PDF</a></p></div><br><br>
 </div>
-<?
-                        echo $errors->first("ok", "<div class='exito mensajes'>{$errors->first('ok')}</div>");
-  ?>
   <table class="table table-bordered datatable" id="table-3" aria-describedby="table-3_info" style="width: 1415px;">
              	<thead>
              		<tr>
              			<th>Id</th>
+             			<th>Empresa</th>
              			<th>Nombre</th>
              			<th>Apellidos</th>
              			<th>Email</th>
@@ -35,6 +33,7 @@
 <?php foreach($paginacion as $fila): ?>
 		<tr>
 			<td>{{$fila->id}}</td>
+			<td>{{$fila->empresa}}</td>
 			<td>{{$fila->nombre}}</td>
 			<td>{{$fila->apell1 .' '. $fila->apell2}}</td>
 			<td>{{$fila->email}}</td>
@@ -90,8 +89,9 @@ tableContainer.dataTable({
 "sPaginationType": "bootstrap",
 "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todo"]],
 "bStateSave": false,
-"aaSorting":[[2,"asc"]],
+"aaSorting":[[1,"asc"]],
 "aoColumns": [
+            			null,
             			null,
             			null,
             			null,

@@ -167,6 +167,9 @@ $(document).ready(function(){
                     <li>
                         <a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-mail"></i><span>Configurar Correo</span></a>
                     </li>
+                    <li>
+                        <a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-users"></i><span>Usuarios</span></a>
+                    </li>
                 </ul>
             </li>
 		</ul>

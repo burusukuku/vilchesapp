@@ -6,7 +6,7 @@ class ClientesController extends BaseController {
 
     public function index()
     {
-        $paginacion = Clientes::orderBy('apell1')->get();
+        $paginacion = Clientes::orderBy('empresa')->get();
         return View::make('clientes.index', array('paginacion' => $paginacion));
     }
 
@@ -22,32 +22,40 @@ class ClientesController extends BaseController {
         $documentos = Documentos::all();
         return View::make('clientes.mostrar', array('clientes' => $clientes, 'documentos' => $documentos));
     }
-    
+
+    public function editar($id)
+    {
+
+        $clientes =  Clientes::find($id);
+        return View::make('clientes.editar', array('clientes' => $clientes));
+    }
+
     public function guardar()
     {
-        $rules = array(
-            "nombre" => "required",
-            "dni" => "required|unique:clientes,dni",
-            "apell1" => "required",
-            "apell2" => "required",
-            "fecha_nac" => "required",
-            "email" => "required",
-            "telefono" => "required",
-            "direccion" => "required",
-            "localidad" => "required",
-        );
+        $grupo=Input::get('grupo');
+        if($grupo=='*') //Cuando se quiere añadir a un grupo que se está creando en ese momento.
+        {
+            $rules = array(
+                "cif" => "unique:clientes,cif",
+                "empresa" => "required|unique:clientes,empresa",
+                "nuevogrupo"=>"required|unique:grupos_cli,nombre"
+            );
+        }else{
+            $rules = array(
+                "cif" => "unique:clientes,cif",
+                "empresa" => "required|unique:clientes,empresa",
+            );
+        }
+
+
 
         $messages = array(
-            "dni.required" => "El campo dni es requerido",
-            "dni.unique" => "El dni ya existe en la base de datos",
-            "nombre.required" => "El campo nombre es requerido",
-            "apell1.required" => "El campo primer apellido es requerido",
-            "apell2.required" => "El campo segundo apellido es requerido",
-            "telefono.required" => "El campo telefono es requerido",
-            "email.required" => "El campo email es requerido",
-            "fecha_nac.required" => "El campo fecha de nacimiento es requerido",
-            "direccion.required" => "El campo direccion es requerido",
-            "localidad.required" => "El campo localidad es requerido",
+
+            "cif.unique" => "El campo cif ya existe en la base de datos",
+            "empresa.required" => "El campo empresa es requerido",
+            "empresa.unique" => "La empresa ya existe en la base de datos",
+            "nuevogrupo.required" => "El nombre del nuevo grupo es requerido",
+            "nuevogrupo.unique" => "El grupo ya existe en la base de datos",
         );
 
         $confirmacion = array(
@@ -56,20 +64,26 @@ class ClientesController extends BaseController {
         $validator = Validator::make(Input::All(), $rules, $messages);
         if ($validator->passes()) {
 
-            $fecha = Carbon::createFromFormat('d/m/Y', Input::get('fecha_nac'));
-            $fecha_nac = $fecha->toDateString();
+
+            if(is_numeric ($grupo)==false && $grupo<>0){
+                Grupo::create(array('nombre'=>Input::get('nuevogrupo')));
+                $grupo=Grupo::all()->last()->id;
+            }
 
             $clientes = Clientes::create(array(
+                'cif' => Input::get('cif'),
+                'empresa' => Input::get('empresa'),
                 'nombre' => Input::get('nombre'),
-                'dni' => Input::get('dni'),
                 'apell1' => Input::get('apell1'),
                 'apell2' => Input::get('apell2'),
                 'telefono' => Input::get('telefono'),
                 'email' => Input::get('email'),
-                'fecha_nac' => $fecha_nac,
                 'direccion' => Input::get('direccion'),
                 'localidad' => Input::get('localidad'),
+                'grupo' => $grupo,
+                'observaciones' => Input::get('observaciones'),
             ));
+
 
             $clientes = Clientes::all();
             Event::fire('auditoria', array($clientes->last()->id, Auth::user()->get()->user, $clientes->last(), 'Clientes', 'Alta'));
@@ -77,6 +91,30 @@ class ClientesController extends BaseController {
         } else {
             return Redirect::back()->withinput()->withErrors($validator);
         }
+    }
+
+    public function actualizar()
+    {
+        $id = Input::get('id');
+        $clientes =  Clientes::find($id);
+        $clientes->cif = Input::get('cif');
+        $clientes->empresa = Input::get('empresa');
+        $clientes->nombre = Input::get('nombre');
+        $clientes->apell1 = Input::get('apell1');
+        $clientes->apell2 = Input::get('apell2');
+        $clientes->direccion = Input::get('direccion');
+        $clientes->localidad = Input::get('localidad');
+        $clientes->telefono = Input::get('telefono');
+        $clientes->email = Input::get('email');
+        $clientes->grupo = Input::get('grupo');
+
+        $clientes->save();
+
+        Event::fire('auditoria', array($id, Auth::user()->get()->user, Clientes::find($id), 'Clientes', 'Modificacion'));
+        $mensaje = 'Perfecto cliente modificado correctamente.';
+        $clientes =  Clientes::find($id);
+        $documentos = Documentos::all();
+        return View::make('clientes.mostrar', array('clientes' => $clientes, 'documentos' => $documentos, 'mensaje'=>$mensaje));
     }
 
     public function subirdocumento()
