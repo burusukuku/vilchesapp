@@ -147,11 +147,60 @@ class ClientesController extends BaseController {
         return Redirect::action('ClientesController@index');
     }
 
-    public function descargar($id){
+    public function descargar($id)
+    {
         //PDF file is stored under project/public/download/info.pdf
         $documento=Documentos::find($id);
         $file="documentos/".$documento->idcliente."/".$documento->ruta;
         return Response::download($file);
+    }
+
+    public function clientespdf()
+    {
+        $html = '<html><head><meta charset="utf-8"><link rel="stylesheet" href="/neon/assets/css/bootstrap.css"  id="style-resource-4">';
+        $html.= '<style type="text/css">
+          @page { margin: 70px 32px; }
+
+          #footer { position: fixed; left: 0px; bottom: -160px; right: 0px; height: 165px;}
+          #footer .page:after { content: counter(page, decimal);}
+        </style>
+    <link rel="stylesheet" href="/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css"  id="style-resource-1">
+	<link rel="stylesheet" href="/neon/assets/css/font-icons/entypo/css/entypo.css"  id="style-resource-2">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic"  id="style-resource-3">
+	<link rel="stylesheet" href="/neon/assets/css/bootstrap.css"  id="style-resource-4">
+	<link rel="stylesheet" href="/neon/assets/css/neon.core.min.css"  id="style-resource-5">
+	<link rel="stylesheet" href="/neon/assets/css/neon-core.css"  id="style-resource-9">
+	<link rel="stylesheet" href="/neon/assets/css/neon-theme.css"  id="style-resource-6">
+	<link rel="stylesheet" href="/neon/assets/css/neon-forms.css"  id="style-resource-7">
+	<link rel="stylesheet" href="/neon/assets/css/custom.css"  id="style-resource-8">
+	<link rel="stylesheet" href="/neon/assets/css/cajas.css"  id="style-resource-9">
+	</head><body class="page-body"><div class="page-container">';
+        $html.= '<div class="imagenlogo" style="text-align: center;"><img src="./neon/assets/images/logo2.png" width="150px" height="70px" /></div>';
+        $html.= '<div class="col-xs-6 col-left"><h3>Clientes:</h3></div>';
+        $html.= '<div class="row">';
+        $html.= '<table class="table table-bordered datatable" id="table-3" aria-describedby="table-3_info" style="width: 800px;">';
+        $html.= '<thead><tr>';
+        $html.= '<td><strong>Id</strong></td><td><strong>Dni</strong></td><td><strong>Nombre</strong></td><td><strong>Apellidos</strong></td><td><strong>Teléfono</strong></td><td><strong>Email</strong></td>';
+        $html.= '</tr></thead><tbody>';
+        $cartas = Clientes::orderBy('apell1')->get();
+        foreach ($cartas as $fila) {
+            $html.= '<tr>';
+            $html.= '<td>'. $fila['id'] .'</td>';
+            $html.= '<td>'. $fila['dni'] .'</td>';
+            $html.= '<td>'. $fila['nombre'] .'</td>';
+            $html.= '<td>'. $fila['apell1'] .' '.$fila['apell2'] .'</td>';
+            $html.= '<td>'. $fila['telefono'] .'</td>';
+            $html.= '<td>'. $fila['email'] .'</td>';
+            $html.= '</tr>';
+        }
+
+        $html.= '</tbody></table></div>';
+        $html.= '<div id="footer"><div align="center" style="font-size:11px;">Esta información es CONFIDENCIAL y está sometida a secreto profesional o cuya divulgación está prohibida por la ley. Si ha recibido este informe por error, debe saber que su lectura, copia y uso estan prohibidos. Le rogamos que nos lo comunique inmediatamente y proceda a su destrucción.</div>
+         <div align="right" class="page" style="font-size:13px;">Pag: </div></div></div></div>';
+        $html.= '</body></html>';
+
+
+        return PDF::load($html, 'A4', 'portrait')->show();
     }
 
 }

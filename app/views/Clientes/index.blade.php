@@ -81,6 +81,12 @@ jQuery(document).ready(function($)
 {
 tableContainer = $("#table-3");
 tableContainer.dataTable({
+"oLanguage": {
+"sEmptyTable": "No existen registros guardados!",
+"sLengthMenu": "_MENU_ registros por página",
+"sInfo":"Mostrando _START_ a _END_ de _TOTAL_ registros",
+"sInfoEmpty":"No se muestra ningún registro"
+},
 "sPaginationType": "bootstrap",
 "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todo"]],
 "bStateSave": false,
