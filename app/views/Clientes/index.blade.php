@@ -17,9 +17,6 @@
 <div class="col-xs-6 col-left"><h3>Ver Clientes</h3></div>
 <div class="col-xs-6 col-right"><p class="text-right"><a href="{{URL::route('clientespdf')}}" class="btn btn-red" target="_blank"><i class="entypo-download"></i> Descargar en PDF</a></p></div><br><br>
 </div>
-<?
-                        echo $errors->first("ok", "<div class='exito mensajes'>{$errors->first('ok')}</div>");
-  ?>
   <table class="table table-bordered datatable" id="table-3" aria-describedby="table-3_info" style="width: 1415px;">
              	<thead>
              		<tr>
@@ -86,8 +83,9 @@ tableContainer.dataTable({
 "sPaginationType": "bootstrap",
 "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todo"]],
 "bStateSave": false,
-"aaSorting":[[2,"asc"]],
+"aaSorting":[[1,"asc"]],
 "aoColumns": [
+            			null,
             			null,
             			null,
             			null,

@@ -22,7 +22,7 @@
 
 			<div class="panel-heading">
 				<div class="panel-title">
-					Datos Personales
+					Datos Cliente
 				</div>
 				<div class="panel-options">
 				    <a href="{{URL::route('clientes.editar', array('id' => $clientes->id))}}" class="btn btn-default btn-sm btn-icon icon-left">
@@ -58,7 +58,12 @@
 
 					    <label for="field-2" class="col-sm-2 control-label">Dni: </label>
                         <div class="col-sm-3">
-                        {{Form::input("text", "dni", $clientes->dni, array("class" => "form-control", "placeholder"=>"Dni", "id"=>"field-2",'disabled'))}}
+                        {{Form::input("text", "empresa", $clientes->empresa, array("class" => "form-control", "placeholder"=>"Empresa", "id"=>"field-2",'disabled'))}}
+                        </div>
+
+					    <label for="field-2" class="col-sm-2 control-label">Cif: </label>
+                        <div class="col-sm-3">
+                        {{Form::input("text", "dni", $clientes->cif, array("class" => "form-control", "placeholder"=>"Cif", "id"=>"field-2",'disabled'))}}
                         </div>
                     </div>
                     <div class="form-group">
@@ -68,7 +73,7 @@
                         </div>
 						 <label for="field-3" class="col-sm-2 control-label">Apellidos: </label>
                          <div class="col-sm-3">
-                         {{Form::input("text", "apell1", $clientes->apell1 .' '. $clientes->apell2, array("class" => "form-control", "placeholder"=>"1º Apellido", "id"=>"field-3",'disabled'))}}
+                         {{Form::input("text", "apell1", $clientes->apell1 .' '. $clientes->apell2, array("class" => "form-control", "placeholder"=>"Apellidos", "id"=>"field-3",'disabled'))}}
                          </div>
 
 				    </div>
@@ -78,21 +83,11 @@
                         <div class="col-sm-3">
                         {{Form::input("text", "telefono", $clientes->telefono, array("class" => "form-control", "placeholder"=>"Teléfono", "id"=>"field-5",'disabled'))}}
                         </div>
-                        <label for="field-6" class="col-sm-2 control-label">Fecha_nac: </label>
+                       <label for="field-5" class="col-sm-2 control-label">Correo: </label>
                         <div class="col-sm-3">
-                        <?
-                        $date = new DateTime($clientes->fecha_nac);
-                        $fecha=$date->format('d/m/Y');
-                        ?>
-                        {{Form::input("text", "fecha_nac", $fecha, array("class" => "form-control","placeholder"=>"Fecha de nacimiento",  "id"=>"field-6", "data-mask"=>"date",'disabled'))}}
+                        {{Form::input("text", "email", $clientes->email, array("class" => "form-control", "placeholder"=>"Correo", "id"=>"field-5",'disabled'))}}
                         </div>
                     </div>
-                     <div class="form-group">
-                         <label for="field-5" class="col-sm-2 control-label">Correo: </label>
-                         <div class="col-sm-3">
-                         {{Form::input("text", "email", $clientes->email, array("class" => "form-control", "placeholder"=>"Correo", "id"=>"field-5",'disabled'))}}
-                         </div>
-                     </div>
                      <div class="form-group">
                         <label for="field-6" class="col-sm-2 control-label">Dirección: </label>
                         <div class="col-sm-3">
@@ -102,6 +97,26 @@
                         <div class="col-sm-3">
                         {{Form::input("text", "localidad", $clientes->localidad, array("class" => "form-control","placeholder"=>"Localidad",  "id"=>"field-7",'disabled'))}}
                         </div>
+                     </div>
+                     <div class="form-group">
+                          <label for="field-5" class="col-sm-2 control-label">Observaciones: </label>
+                          <div class="col-sm-8">
+                          <textarea name="observaciones" class="form-control autogrow" id="field-ta" placeholder="Escribe aqui las observaciones o cualquier dato de interés sobre el cliente." disabled>{{$clientes->observaciones}}</textarea>
+                          </div>
+                       </div>
+                     <div class="form-group">
+                          <label for="field-5" class="col-sm-2 control-label">Pertenece a: </label>
+                          <div class="col-sm-3">
+                          <?
+                            if($clientes->grupo == NULL){ ?>
+                            {{Form::input("text", "grupo", "Ningún grupo", array("class" => "form-control","placeholder"=>"Grupo",  "id"=>"field-7",'disabled'))}}
+                           <? }else{
+                             $grupo=Grupo::where('id','=',$clientes->grupo)->select('nombre')->first();
+                             ?>
+                             {{Form::input("text", "grupo", $grupo->nombre, array("class" => "form-control","placeholder"=>"Grupo",  "id"=>"field-7",'disabled'))}}
+                          <?  }
+                          ?>
+                          </div>
                      </div>
 					{{Form::close()}}
 

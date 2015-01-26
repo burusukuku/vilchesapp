@@ -14,5 +14,5 @@ class Grupo extends Eloquent  {
      *
      * @var array
      */
-    protected $fillable = array('nombre');
+    protected $fillable = array('id','nombre');
 }
