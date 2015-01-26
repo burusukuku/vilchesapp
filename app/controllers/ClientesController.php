@@ -6,7 +6,7 @@ class ClientesController extends BaseController {
 
     public function index()
     {
-        $paginacion = Clientes::orderBy('apell1')->get();
+        $paginacion = Clientes::orderBy('empresa')->get();
         return View::make('clientes.index', array('paginacion' => $paginacion));
     }
 
@@ -26,11 +26,11 @@ class ClientesController extends BaseController {
     public function guardar()
     {
         $rules = array(
+            "cif" => "unique:clientes,cif",
+            "empresa" => "required|unique:clientes,empresa",
             "nombre" => "required",
-            "dni" => "required|unique:clientes,dni",
             "apell1" => "required",
             "apell2" => "required",
-            "fecha_nac" => "required",
             "email" => "required",
             "telefono" => "required",
             "direccion" => "required",
@@ -38,14 +38,13 @@ class ClientesController extends BaseController {
         );
 
         $messages = array(
-            "dni.required" => "El campo dni es requerido",
-            "dni.unique" => "El dni ya existe en la base de datos",
+
+            "cif.unique" => "El campo cif ya existe en la base de datos",
             "nombre.required" => "El campo nombre es requerido",
             "apell1.required" => "El campo primer apellido es requerido",
             "apell2.required" => "El campo segundo apellido es requerido",
             "telefono.required" => "El campo telefono es requerido",
             "email.required" => "El campo email es requerido",
-            "fecha_nac.required" => "El campo fecha de nacimiento es requerido",
             "direccion.required" => "El campo direccion es requerido",
             "localidad.required" => "El campo localidad es requerido",
         );
@@ -56,19 +55,18 @@ class ClientesController extends BaseController {
         $validator = Validator::make(Input::All(), $rules, $messages);
         if ($validator->passes()) {
 
-            $fecha = Carbon::createFromFormat('d/m/Y', Input::get('fecha_nac'));
-            $fecha_nac = $fecha->toDateString();
 
             $clientes = Clientes::create(array(
+                'cif' => Input::get('cif'),
+                'empresa' => Input::get('empresa'),
                 'nombre' => Input::get('nombre'),
-                'dni' => Input::get('dni'),
                 'apell1' => Input::get('apell1'),
                 'apell2' => Input::get('apell2'),
                 'telefono' => Input::get('telefono'),
                 'email' => Input::get('email'),
-                'fecha_nac' => $fecha_nac,
                 'direccion' => Input::get('direccion'),
                 'localidad' => Input::get('localidad'),
+                'observaciones' => Input::get('observaciones'),
             ));
 
             $clientes = Clientes::all();

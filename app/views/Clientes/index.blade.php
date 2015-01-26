@@ -24,6 +24,7 @@
              	<thead>
              		<tr>
              			<th>Id</th>
+             			<th>Empresa</th>
              			<th>Nombre</th>
              			<th>Apellidos</th>
              			<th>Email</th>
@@ -35,6 +36,7 @@
 <?php foreach($paginacion as $fila): ?>
 		<tr>
 			<td>{{$fila->id}}</td>
+			<td>{{$fila->empresa}}</td>
 			<td>{{$fila->nombre}}</td>
 			<td>{{$fila->apell1 .' '. $fila->apell2}}</td>
 			<td>{{$fila->email}}</td>

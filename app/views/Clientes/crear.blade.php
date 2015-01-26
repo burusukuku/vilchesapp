@@ -21,7 +21,7 @@
 
 			<div class="panel-heading">
 				<div class="panel-title">
-					Datos Personales
+					Datos Cliente
 				</div>
 			</div>
 
@@ -32,6 +32,7 @@
                                         "role" => "form",
                                         "class" => "form-horizontal",
                                         ))}}
+<<<<<<< Updated upstream
                         @if ($errors->any())
                             <div class="error mensajes">
                               <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -43,18 +44,25 @@
                               </ul>
                             </div>
                          @endif
+
 					<div class="form-group">
+					    <label for="field-2" class="col-sm-2 control-label">Empresa: </label>
+                        <div class="col-sm-3">
+                        {{Form::input("text", "empresa", null, array("class" => "form-control", "placeholder"=>"Empresa", "id"=>"field-2"))}}
+                        </div>
 
-						<label for="field-1" class="col-sm-2 control-label">Dni: </label>
-
+						<label for="field-1" class="col-sm-2 control-label">Cif: </label>
 						<div class="col-sm-3">
-				        {{Form::input("text", "dni", null, array("class" => "form-control", "placeholder"=>"Dni", "id"=>"field-1"))}}
+				        {{Form::input("text", "cif", null, array("class" => "form-control", "placeholder"=>"Cif", "id"=>"field-1"))}}
 						</div>
-				        <label for="field-2" class="col-sm-2 control-label">Nombre: </label>
-						<div class="col-sm-3">
-						{{Form::input("text", "nombre", null, array("class" => "form-control", "placeholder"=>"Nombre", "id"=>"field-2"))}}
-				        </div>
+
 				    </div>
+				    <div class="form-group">
+				    <label for="field-2" class="col-sm-2 control-label">Nombre: </label>
+                        <div class="col-sm-3">
+                        {{Form::input("text", "nombre", null, array("class" => "form-control", "placeholder"=>"Nombre", "id"=>"field-2"))}}
+                        </div>
+                     </div>
 				    <div class="form-group">
 				        <label for="field-3" class="col-sm-2 control-label">1º Apellido: </label>
                         <div class="col-sm-3">
@@ -70,17 +78,11 @@
                         <div class="col-sm-3">
                         {{Form::input("text", "telefono", null, array("class" => "form-control", "placeholder"=>"Teléfono", "id"=>"field-5"))}}
                         </div>
-                        <label for="field-6" class="col-sm-2 control-label">Fecha_nac: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "fecha_nac", null, array("class" => "form-control","placeholder"=>"Fecha de nacimiento",  "id"=>"field-6", "data-mask"=>"date"))}}
-                        </div>
-                    </div>
-                     <div class="form-group">
-                         <label for="field-5" class="col-sm-2 control-label">Correo: </label>
+                        <label for="field-5" class="col-sm-2 control-label">Correo: </label>
                          <div class="col-sm-3">
                          {{Form::input("text", "email", null, array("class" => "form-control", "placeholder"=>"Correo", "id"=>"field-5"))}}
                          </div>
-                     </div>
+                    </div>
                      <div class="form-group">
                         <label for="field-5" class="col-sm-2 control-label">Dirección: </label>
                         <div class="col-sm-3">
@@ -91,6 +93,30 @@
                         {{Form::input("text", "localidad", null, array("class" => "form-control","placeholder"=>"Localidad",  "id"=>"field-6"))}}
                         </div>
                      </div>
+                     <div class="form-group">
+                         <label for="field-5" class="col-sm-2 control-label">Observaciones: </label>
+                         <div class="col-sm-8">
+                         <textarea name="observaciones" class="form-control autogrow" id="field-ta" placeholder="Escribe aqui las observaciones o cualquier dato de interés sobre el cliente."></textarea>
+                         </div>
+                      </div>
+                     <div class="form-group">
+                         <label for="field-5" class="col-sm-2 control-label">Pertenece a: </label>
+                         <div class="col-sm-3">
+                         <select id="grupo" name="grupo" class="form-control" onchange="activargruponuevo(this);">
+                             <option selected>Seleccione un grupo</option>
+                             <option value='*'>Crear nuevo grupo</option>
+
+                              {{$registros= Grupo::distinct()->select('nombre')->groupBy('nombre')->get()}};
+
+                              @foreach($registros as $registro)
+                              echo "<option value='{{$registro->nombre}}'>{{$registro->nombre}}</option>";
+                              @endforeach
+                         </select>
+                         </div>
+                         <div class="col-sm-3">
+                         {{Form::input("text", "nuevogrupo", null, array("class" => "form-control","placeholder"=>"Nuevo grupo",  "id"=>"nuevogrupo", "disabled"=>true))}}
+                         </div>
+                      </div>
 
 					<div class="form-group">
 						<div class="col-sm-offset-5 col-sm-5">
@@ -106,7 +132,13 @@
 
 	</div>
 </div>
-
+<script type="text/javascript">
+function activargruponuevo(selec) {
+    if (selec.value == '*') {
+    document.getElementById('nuevogrupo').disabled = false;
+    }
+}
+</script>
 @stop
 
 

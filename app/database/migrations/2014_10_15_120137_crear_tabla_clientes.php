@@ -16,7 +16,8 @@ class CrearTablaClientes extends Migration {
         {
             $table -> increments('id');
 
-            $table->string('dni');
+            $table->string('cif');
+            $table->string('empresa');
             $table->string('nombre');
             $table->string('apell1');
             $table->string('apell2');
@@ -24,9 +25,11 @@ class CrearTablaClientes extends Migration {
             $table->string('email');
             $table->string('direccion');
             $table->string('localidad');
-            $table->date('fecha_nac');
+            $table->integer('grupo');
+            $table->longText('observaciones');
 
-            $table->unique(array('dni'));
+            $table->unique(array('empresa'));
+            $table->unique(array('cif'));
 
             $table->timestamps();
         });
