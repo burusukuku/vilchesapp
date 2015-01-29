@@ -16,7 +16,7 @@ Route::when('*','csrf', ['post']);
 //RUTAS PARA INVITADOS
 Route::group(array('before' => 'guest_user'), function() {
     Route::get('/recoverpassword', array('as' => 'recoverpassword', 'uses' => 'HomeController@recoverpassword'));
-    Route::any('/resetpassword/{type}/{token}', array('as' => 'resetpassword', 'uses' => 'HomeController@resetpassword'));
+    Route::any('/password/reset/{token}', array('as' => 'resetpassword', 'uses' => 'HomeController@resetpassword'));
     Route::get('/updatepassword', array('as' => 'updatepassword', 'uses' => 'HomeController@updatepassword'));
     Route::get('/login', array('as' => 'login', 'uses' => 'HomeController@login'));
 });
@@ -37,10 +37,19 @@ Route::group(array('before' => 'auth_user'), function() {
     Route::get('/clientespdf', array('as' => 'clientespdf', 'uses' => 'ClientesController@clientespdf'));
     Route::get('/descargar/{id}', array('as' => 'clientes.descargar', 'uses' => 'ClientesController@descargar'));
 
+    //Otros
     Route::get('/',array('as' => 'index', 'uses' => 'HomeController@index'));
     Route::get('/salir', array('as' => 'salir', 'uses' => 'HomeController@salir'));
 
 });
+// RUTAS PARA ADMINS
+Route::group(array('before' => 'admin'), function()
+{
+    Route::get('/usuarios',array('as' => 'usuarios.index', 'uses' => 'UsuariosController@index'));
+    Route::get('/usuarios/crear',array('as' => 'usuarios.crear', 'uses' => 'UsuariosController@crear'));
+    Route::post('/usuarios',array('as' => 'usuarios.guardar', 'uses' => 'UsuariosController@guardar'));
+});
+
 
 //Recogida de datos con Post para el login
 Route::post('/login', array('before' => 'csrf', function(){
@@ -84,9 +93,9 @@ Route::post('/recoverpassword', array('before' => 'csrf', function(){
 
     if($validator->passes()){
         Password::user()->remind(Input::only("email"), function($message) {
-            $message->subject('Recuperar contraseña de SiGeCat');
+            $message->subject('Recuperar contraseña de VilchesApp');
         });
-        $message = '<hr><label class="label label-info">Le hemos enviado un email a su cuenta de correo electronico para que pueda recuperar su password</label><hr>';
+        $message = '<hr><label class="label label-info">Le hemos enviado un email a su cuenta de correo</label><hr>';
         return Redirect::route('recoverpassword')->with("message", $message);
     }else{
         return Redirect::back()->withinput()->withErrors($validator);
@@ -99,10 +108,10 @@ Route::post('/updatepassword', array('before' => 'csrf', function(){
     $credentials = array(
         'email' => Input::get('email'),
         'password' => Input::get('password'),
-        'password_confirmation' => Input::get('repetir_password'),
+        'password_confirmation' => Input::get('password_confirmation'),
         'token' => Input::get('token'),
     );
-    if (Auth::attempt(array('email' => Input::get('email')))) {
+    if (Auth::user()->attempt(array('email' => Input::get('email')))) {
         Password::user()->reset($credentials, function ($user, $password) {
             $user->password = Hash::make($password);
             $user->save();

@@ -10,7 +10,6 @@
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
   </head>
-
   <body>
     <div class="container" style="margin-top: 80px">
     <h1><span class="glyphicon glyphicon-fire"></span> Error 404, la página solicitada no existe</h1>

@@ -158,6 +158,10 @@ $(document).ready(function(){
                 </li>
             </ul>
         </li>
+        <?
+        $tipo=Auth::user()->get()->tipo;
+        if($tipo == 'admin'){
+        ?>
         <li class="<? echo $secciones['configuracion']; ?>">
             <a href="http://demo.neontheme.com/dashboard/main/"><i class="entypo-tools"></i><span>Configuración</span></a>
                 <ul>
@@ -168,10 +172,13 @@ $(document).ready(function(){
                         <a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-mail"></i><span>Configurar Correo</span></a>
                     </li>
                     <li>
-                        <a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-users"></i><span>Usuarios</span></a>
+                        <a href="{{URL::route('usuarios.index')}}"><i class="entypo-users"></i><span>Usuarios</span>   <i class="entypo-lock"></i></a>
                     </li>
                 </ul>
             </li>
+            <?
+            }
+            ?>
 		</ul>
 				
 	</div>	

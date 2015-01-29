@@ -30,11 +30,14 @@ class HomeController extends BaseController {
     }
     public function recoverpassword()
     {
-        return View::make('HomeController.recoverpassword');
+        return View::make('Home.recoverpassword');
     }
-    public function resetpassword($type, $token)
+    public function resetpassword($token)
     {
-        return View::make('HomeController.resetpassword')->with('token',$token);
+        return View::make('Home.resetpassword')->with('token',$token);
+    }
+    public function updatepassword()
+    {
     }
 
 }

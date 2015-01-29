@@ -104,4 +104,15 @@ Route::filter('guest_user', function()
     if (Auth::user()->check()) return Redirect::to('/');
 });
 
+Route::filter('admin', function()
+{
+    $tipo=Auth::user()->get()->tipo;
+    if ($tipo != 'admin')
+    {
+        return Response::make('Unauthorized', 401);
+    }
+
+});
+
+
 
