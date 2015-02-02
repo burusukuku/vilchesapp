@@ -135,6 +135,8 @@
 function activargruponuevo(selec) {
     if (selec.value == '*') {
     document.getElementById('nuevogrupo').disabled = false;
+    }else{
+    document.getElementById('nuevogrupo').disabled = true;
     }
 }
 </script>
