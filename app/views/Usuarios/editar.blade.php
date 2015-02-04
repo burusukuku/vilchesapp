@@ -2,8 +2,8 @@
 
 
 @section('head')
-<title>Editar Cliente</title>
-<meta name='description' content='Editar Cliente'>
+<title>Editar Usuarios</title>
+<meta name='description' content='Editar Usuarios'>
 <meta name='keywords' content='palabras, clave'>
 <meta name='robots' content='All'>
 <meta http-equiv="cache-control" content="max-age=0" />
@@ -14,113 +14,76 @@
 @stop
 
 @section('contenido')
-<h1>Editar Cliente</h1>
+<h1>Editar Usuarios</h1>
 <div class="row">
 	<div class="col-md-12">
+@if ($errors->any())
+    <div class="error mensajes">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Por favor corrige los siguentes errores:</strong>
+      <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+      </ul>
+    </div>
+ @endif
 <div class="panel panel-primary" data-collapsed="0">
 
 			<div class="panel-heading">
 				<div class="panel-title">
-					Datos Cliente
+					Datos Usuarios
 				</div>
 			</div>
 
 			<div class="panel-body">
                 {{Form::open(array(
                                         "method" => "POST",
-                                        "action" => "ClientesController@actualizar",
+                                        "action" => "UsuariosController@actualizar",
                                         "role" => "form",
                                         "class" => "form-horizontal",
                                         ))}}
-                        @if ($errors->any())
-                            <div class="error mensajes">
-                              <button type="button" class="close" data-dismiss="alert">&times;</button>
-                              <strong>Por favor corrige los siguentes errores:</strong>
-                              <ul>
-                              @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                              @endforeach
-                              </ul>
-                            </div>
-                         @endif
-
 					<div class="form-group">
-					    <label for="field-2" class="col-sm-2 control-label">Empresa: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "empresa", $clientes->empresa, array("class" => "form-control", "placeholder"=>"Empresa", "id"=>"field-2"))}}
+					    <label for="field-2" class="col-md-4 control-label">Nombre: </label>
+                        <div class="col-md-4">
+                        {{Form::input("text", "user", $usuarios->user, array("class" => "form-control", "placeholder"=>"Nombre", "id"=>"field-2"))}}
                         </div>
-
-						<label for="field-1" class="col-sm-2 control-label">Cif: </label>
-						<div class="col-sm-3">
-				        {{Form::input("text", "cif", $clientes->cif, array("class" => "form-control", "placeholder"=>"Cif", "id"=>"field-1"))}}
+                    </div>
+                    <div class="form-group">
+						<label for="field-1" class="col-md-4 control-label">Correo: </label>
+						<div class="col-md-4">
+				        {{Form::input("text", "email", $usuarios->email, array("class" => "form-control", "placeholder"=>"Correo", "id"=>"field-1"))}}
 						</div>
 
 				    </div>
 				    <div class="form-group">
-				    <label for="field-2" class="col-sm-2 control-label">Nombre: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "nombre", $clientes->nombre, array("class" => "form-control", "placeholder"=>"Nombre", "id"=>"field-2"))}}
-                        </div>
-                     </div>
-				    <div class="form-group">
-				        <label for="field-3" class="col-sm-2 control-label">1º Apellido: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "apell1", $clientes->apell1, array("class" => "form-control", "placeholder"=>"1º Apellido", "id"=>"field-3"))}}
-                        </div>
-						<label for="field-4" class="col-sm-2 control-label">2º Apellido: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "apell2", $clientes->apell2, array("class" => "form-control", "placeholder"=>"2º Apellido", "id"=>"field-4"))}}
-                        </div>
-					</div>
-				    <div class="form-group">
-                        <label for="field-5" class="col-sm-2 control-label">Teléfono: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "telefono", $clientes->telefono, array("class" => "form-control", "placeholder"=>"Teléfono", "id"=>"field-5"))}}
-                        </div>
-                        <label for="field-5" class="col-sm-2 control-label">Correo: </label>
-                         <div class="col-sm-3">
-                         {{Form::input("text", "email", $clientes->email, array("class" => "form-control", "placeholder"=>"Correo", "id"=>"field-5"))}}
-                         </div>
-                    </div>
-                     <div class="form-group">
-                        <label for="field-5" class="col-sm-2 control-label">Dirección: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "direccion", $clientes->direccion, array("class" => "form-control", "placeholder"=>"Dirección", "id"=>"field-5"))}}
-                        </div>
-                        <label for="field-6" class="col-sm-2 control-label">Localidad: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "localidad", $clientes->localidad, array("class" => "form-control","placeholder"=>"Localidad",  "id"=>"field-6"))}}
-                        </div>
-                     </div>
-                     <div class="form-group">
-                         <label for="field-5" class="col-sm-2 control-label">Observaciones: </label>
-                         <div class="col-sm-8">
-                         <textarea name="observaciones" class="form-control autogrow" id="field-ta" placeholder="Escribe aqui las observaciones o cualquier dato de interés sobre el cliente.">{{$clientes->observaciones}}</textarea>
-                         </div>
-                      </div>
-                     <div class="form-group">
-                         <label for="field-5" class="col-sm-2 control-label">Pertenece a: </label>
-                         <div class="col-sm-3">
-                         <select id="grupo" name="grupo" class="form-control" onchange="activargruponuevo(this);">
-                             <option value="" disabled selected>Seleccione un grupo</option>
-                             <option value='*'>Crear nuevo grupo</option>
-
-                              {{$registros= Grupo::distinct()->groupBy('nombre')->get()}};
-
-                              @foreach($registros as $registro)
-                              echo "<option value='{{$registro->id}}'>{{$registro->nombre}}</option>";
-                              @endforeach
+				    <label for="field-2" class="col-md-4 control-label">Tipo: </label>
+                        <div class="col-md-4">
+                        <select id="tipo" name="tipo" class="form-control">
+                             <option value="{{$usuarios->tipo}}" selected>{{$usuarios->tipo}}</option>
+                             <option value='Usuario'>Usuario</option>
+                             <option value='Administrador'>Administrador</option>
                          </select>
                          </div>
-                         <div class="col-sm-3">
-                         {{Form::input("text", "nuevogrupo", null, array("class" => "form-control","placeholder"=>"Nuevo grupo",  "id"=>"nuevogrupo", "disabled"=>true))}}
-                         </div>
-                      </div>
-
+                     </div>
+                     <? if(Auth::user()->get()->id!=$usuarios->id){?>
+					<div class="form-group">
+                        <label class="col-md-4 control-label">Activo</label>
+                            <div class="col-md-4">
+                                <div class="make-switch" data-text-label="<i class='entypo-user'></i>">
+                                <? if($usuarios->active=='1'){?>
+                                {{Form::checkbox("activo", '1', true )}}
+                                <?}else{?>
+				                {{Form::checkbox("activo", '1', false)}}
+                                 <?}?>
+                                </div>
+                            </div>
+					</div>
+					<? } ?>
 					<div class="form-group">
 						<div class="col-sm-offset-5 col-sm-5">
 						    {{Form::input("hidden", "_token", csrf_token())}}
-						    {{Form::input("hidden", "id", $clientes->id)}}
+						    {{Form::input("hidden", "id", $usuarios->id)}}
                             {{Form::input("submit", null, "Guardar cambios", array("class" => "btn btn-default"))}}
                         </div>
 					{{Form::close()}}
@@ -132,13 +95,6 @@
 
 	</div>
 </div>
-<script type="text/javascript">
-function activargruponuevo(selec) {
-    if (selec.value == '*') {
-    document.getElementById('nuevogrupo').disabled = false;
-    }
-}
-</script>
 @stop
 
 

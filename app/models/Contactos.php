@@ -1,18 +1,18 @@
 <?php
 
-class Clientes extends Eloquent  {
+class Contactos extends Eloquent  {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'clientes';
+    protected $table = 'contactos_cli';
 
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $fillable = array('id', 'cif','empresa','direccion','localidad','grupo','observaciones');
+    protected $fillable = array('id_cli','nombre','apell1','apell2','telefono','email','direccion','localidad');
 }

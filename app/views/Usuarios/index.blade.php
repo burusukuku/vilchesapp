@@ -15,8 +15,11 @@
 @section('contenido')
 <div class="row">
 <div class="col-xs-6 col-left"><h3>Ver Usuarios</h3></div>
-<div class="col-xs-6 col-right"><p class="text-right"><a href="{{URL::route('clientespdf')}}" class="btn btn-red" target="_blank"><i class="entypo-download"></i> Descargar en PDF</a></p></div><br><br>
+<div class="col-xs-6 col-right"><p class="text-right"><a href="" class="btn btn-red" target="_blank"><i class="entypo-download"></i> Descargar en PDF</a></p></div><br><br>
 </div>
+@if(Session::has('exito'))
+            <div class="exito mensajes">{{ Session::get('exito') }}</div>
+     @endif
   <table class="table table-bordered datatable" id="table-3" aria-describedby="table-3_info" style="width: 1415px;">
              	<thead>
              		<tr>
@@ -36,19 +39,19 @@
 			<td>{{$fila->user}}</td>
 			<td>{{$fila->email}}</td>
 			<td><? if($fila->active==1){echo 'Si';}else{echo 'No';}?></td>
-			<td><? if($fila->tipo=='admin'){echo 'Administrador';}else{echo 'Usuario';}?></td>
+			<td>{{$fila->tipo}}</td>
 			<td>
-				<a href="{{URL::route('clientes.editar', array('id' => $fila['id']))}}" class="btn btn-default btn-sm btn-icon icon-left">
+				<a href="{{URL::route('usuarios.editar', array('id' => $fila['id']))}}" class="btn btn-default btn-sm btn-icon icon-left">
 					<i class="entypo-pencil"></i>
 					Editar
 				</a>
-				<a href="{{URL::route('clientes.eliminar', array('id' => $fila['id'] ))}}" class="btn btn-danger btn-sm btn-icon icon-left">
+				<a href="{{URL::route('usuarios.eliminar', array('id' => $fila['id'] ))}}" class="btn btn-danger btn-sm btn-icon icon-left">
 				    <i class="entypo-cancel"></i>
 				    Eliminar
 				</a>
 
 
-				<a href="{{URL::route('clientes.mostrar', array('id' => $fila['id'] ))}}" class="btn btn-info btn-sm btn-icon icon-left">
+				<a href="{{URL::route('usuarios.mostrar', array('id' => $fila['id'] ))}}" class="btn btn-info btn-sm btn-icon icon-left">
 					<i class="entypo-info"></i>
 					Ficha
 				</a>

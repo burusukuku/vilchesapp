@@ -45,53 +45,29 @@
                          @endif
 
 					<div class="form-group">
-					    <label for="field-2" class="col-sm-2 control-label">Empresa: </label>
-                        <div class="col-sm-3">
+                        <label for="field-1" class="col-md-2 control-label">Cif: </label>
+                        <div class="col-md-3">
+                        {{Form::input("text", "cif", null, array("class" => "form-control", "placeholder"=>"Cif", "id"=>"field-1"))}}
+                        </div>
+                    </div>
+
+					<div class="form-group">
+					    <label for="field-2" class="col-md-2 control-label">Empresa: </label>
+                        <div class="col-md-3">
                         {{Form::input("text", "empresa", null, array("class" => "form-control", "placeholder"=>"Empresa", "id"=>"field-2"))}}
                         </div>
-
-						<label for="field-1" class="col-sm-2 control-label">Cif: </label>
-						<div class="col-sm-3">
-				        {{Form::input("text", "cif", null, array("class" => "form-control", "placeholder"=>"Cif", "id"=>"field-1"))}}
-						</div>
-
-				    </div>
-				    <div class="form-group">
-				    <label for="field-2" class="col-sm-2 control-label">Nombre: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "nombre", null, array("class" => "form-control", "placeholder"=>"Nombre", "id"=>"field-2"))}}
-                        </div>
                      </div>
-				    <div class="form-group">
-				        <label for="field-3" class="col-sm-2 control-label">1º Apellido: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "apell1", null, array("class" => "form-control", "placeholder"=>"1º Apellido", "id"=>"field-3"))}}
-                        </div>
-						<label for="field-4" class="col-sm-2 control-label">2º Apellido: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "apell2", null, array("class" => "form-control", "placeholder"=>"2º Apellido", "id"=>"field-4"))}}
-                        </div>
-					</div>
-				    <div class="form-group">
-                        <label for="field-5" class="col-sm-2 control-label">Teléfono: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "telefono", null, array("class" => "form-control", "placeholder"=>"Teléfono", "id"=>"field-5"))}}
-                        </div>
-                        <label for="field-5" class="col-sm-2 control-label">Correo: </label>
+
+				      <div class="form-group">
+                         <label for="field-5" class="col-sm-2 control-label">Dirección: </label>
                          <div class="col-sm-3">
-                         {{Form::input("text", "email", null, array("class" => "form-control", "placeholder"=>"Correo", "id"=>"field-5"))}}
+                         {{Form::input("text", "direccion",null, array("class" => "form-control", "placeholder"=>"Dirección", "id"=>"field-5"))}}
                          </div>
-                    </div>
-                     <div class="form-group">
-                        <label for="field-5" class="col-sm-2 control-label">Dirección: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "direccion", null, array("class" => "form-control", "placeholder"=>"Dirección", "id"=>"field-5"))}}
-                        </div>
-                        <label for="field-6" class="col-sm-2 control-label">Localidad: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "localidad", null, array("class" => "form-control","placeholder"=>"Localidad",  "id"=>"field-6"))}}
-                        </div>
-                     </div>
+                         <label for="field-6" class="col-sm-1 control-label">Localidad: </label>
+                         <div class="col-sm-3">
+                         {{Form::input("text", "localidad", null, array("class" => "form-control","placeholder"=>"Localidad",  "id"=>"field-6"))}}
+                         </div>
+                      </div>
                      <div class="form-group">
                          <label for="field-5" class="col-sm-2 control-label">Observaciones: </label>
                          <div class="col-sm-8">
@@ -134,11 +110,16 @@
 <script type="text/javascript">
 function activargruponuevo(selec) {
     if (selec.value == '*') {
+    document.getElementById('nuevogrupo').style.display = 'block';
     document.getElementById('nuevogrupo').disabled = false;
     }else{
     document.getElementById('nuevogrupo').disabled = true;
+    document.getElementById('nuevogrupo').style.display = 'none';
     }
 }
+window.onload = function(){
+   document.getElementById('nuevogrupo').style.display = 'none';
+   }
 </script>
 @stop
 

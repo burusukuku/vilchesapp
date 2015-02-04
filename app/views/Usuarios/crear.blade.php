@@ -17,6 +17,17 @@
 <h1>Añadir Usuario</h1>
 <div class="row">
 	<div class="col-md-12">
+ @if ($errors->any())
+    <div class="error mensajes">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Por favor corrige los siguentes errores:</strong>
+      <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+      </ul>
+    </div>
+ @endif
 <div class="panel panel-primary" data-collapsed="0">
 
 			<div class="panel-heading">
@@ -32,19 +43,6 @@
                                         "role" => "form",
                                         "class" => "form-horizontal",
                                         ))}}
-                        @if ($errors->any())
-                            <div class="error mensajes">
-                              <button type="button" class="close" data-dismiss="alert">&times;</button>
-                              <strong>Por favor corrige los siguentes errores:</strong>
-                              <ul>
-                              @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                              @endforeach
-                              </ul>
-                            </div>
-                         @endif
-
-
 				    <div class="form-group">
 				    <label for="field-2" class="col-md-4 control-label">Nombre: </label>
                         <div class="col-md-4">
@@ -59,7 +57,7 @@
                      </div>
 
 				    <div class="form-group">
-                        <label for="field-5" class="col-md-3 control-label">Contraseña: </label>
+                        <label for="field-5" class="col-md-4 control-label">Contraseña: </label>
                         <div class="col-md-3">
                         {{Form::input("password", "password", null, array("class" => "form-control", "placeholder"=>"Contraseña", "id"=>"field-5"))}}
                         </div>
@@ -72,19 +70,27 @@
                          <div class="col-md-4">
                          <select id="tipo" name="tipo" class="form-control">
                              <option value="" disabled selected>Seleccione un tipo de usuario</option>
-                             <option value='user'>Usuario</option>
-                             <option value='admin'>Administrador</option>
+                             <option value='Usuario'>Usuario</option>
+                             <option value='Administrador'>Administrador</option>
                          </select>
                          </div>
                       </div>
 
 					<div class="form-group">
-						<div class="col-sm-offset-5 col-sm-5">
-						    {{Form::input("hidden", "_token", csrf_token())}}
-						    <button type="submit" class="btn btn-default btn-icon icon-left">
-                            Añadir nuevo usuario
-                            <i class="entypo-user-add"></i> </button>
+                        <label class="col-md-4 control-label">Activo</label>
+                        <div class="col-md-4">
+                            <div class="make-switch" data-text-label="<i class='entypo-user'></i>">
+                                {{Form::checkbox("activo", '1', true )}}
+                            </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-5">
+                        {{Form::input("hidden", "_token", csrf_token())}}
+                        <button type="submit" class="btn btn-default btn-icon icon-left">
+                        Añadir nuevo usuario
+                        <i class="entypo-user-add"></i> </button>
+                    </div>
 					{{Form::close()}}
 				</form>
 

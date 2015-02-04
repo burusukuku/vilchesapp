@@ -8,7 +8,8 @@
 		"laravel/framework": "4.2.*",
         "ollieread/multiauth": "dev-master",
         "nesbot/Carbon": "*",
-        "thujohn/pdf": "dev-master"
+        "thujohn/pdf": "dev-master",
+        "felixkiss/uniquewith-validator": "1.1.*"
 
 
 	},

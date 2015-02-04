@@ -122,6 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Thujohn\Pdf\PdfServiceProvider',
+        'Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider',
 
 	),
 

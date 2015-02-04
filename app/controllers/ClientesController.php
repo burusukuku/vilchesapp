@@ -19,8 +19,7 @@ class ClientesController extends BaseController {
     {
 
         $clientes =  Clientes::find($id);
-        $documentos = Documentos::all();
-        return View::make('clientes.mostrar', array('clientes' => $clientes, 'documentos' => $documentos));
+        return View::make('clientes.mostrar', array('clientes' => $clientes));
     }
 
     public function editar($id)
@@ -73,11 +72,6 @@ class ClientesController extends BaseController {
             $clientes = Clientes::create(array(
                 'cif' => Input::get('cif'),
                 'empresa' => Input::get('empresa'),
-                'nombre' => Input::get('nombre'),
-                'apell1' => Input::get('apell1'),
-                'apell2' => Input::get('apell2'),
-                'telefono' => Input::get('telefono'),
-                'email' => Input::get('email'),
                 'direccion' => Input::get('direccion'),
                 'localidad' => Input::get('localidad'),
                 'grupo' => $grupo,
@@ -183,6 +177,51 @@ class ClientesController extends BaseController {
         Clientes::find($id)->delete();
 
         return Redirect::action('ClientesController@index');
+    }
+
+    public function aniadircontacto()
+    {
+        $rules = array(
+            'nombre' => 'required|unique_with:contactos_cli,apell1','apell2',
+            "apell1" => "required",
+            "apell2" => "required",
+            "telefono" => "required",
+            "email" => "required",
+        );
+
+        $messages = array(
+            "nombre.required" => "El campo nombre del documento es requerido",
+            "nombre.uniqued" => "La persona ya existe en la base de datos",
+            "apell1.required" => "El archivo a subir es requerido",
+            "apell2.required" => "El archivo ya existe en la base de datos",
+            "telefono.required" => "El archivo a subir es requerido",
+            "email.required" => "El archivo a subir es requerido",
+        );
+
+
+
+        $validator = Validator::make(Input::All(), $rules, $messages);
+        $id_cli = Input::get('id_cli');
+        if ($validator->passes()) {
+
+            $contactos = Contactos::create(array(
+                'id_cli' => $id_cli,
+                'nombre' => Input::get('nombre'),
+                'apell1' => Input::get('apell1'),
+                'apell2' => Input::get('apell2'),
+                'telefono' => Input::get('telefono'),
+                'email' => Input::get('email'),
+                'direccion' => Input::get('direccion'),
+                'localidad' => Input::get('localidad'),
+            ));
+
+
+            $contactos = Contactos::all();
+            Event::fire('auditoria', array($contactos->last()->id, Auth::user()->get()->user, $contactos->last(), 'Contactos', 'Alta'));
+            return Redirect::action('ClientesController@mostrar', array('id' => $id_cli))->with('exito','La persona de contacto ha sido guardada correctamente' );
+        } else {
+            return Redirect::action('ClientesController@mostrar', array('id' => $id_cli))->withErrors($validator);
+        }
     }
 
     public function descargar($id)

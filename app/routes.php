@@ -30,6 +30,7 @@ Route::group(array('before' => 'auth_user'), function() {
     Route::post('/clientes',array('as' => 'clientes.guardar', 'uses' => 'ClientesController@guardar'));
     Route::post('/clientes/documento', array('as' => 'clientes.subirdocumento', 'uses' => 'ClientesController@subirdocumento'));
     Route::get('/clientes/editar/{id}', array('as' => 'clientes.editar', 'uses' => 'ClientesController@editar'));
+    Route::post('/clientes/editar/{id}', array('as' => 'clientes.aniadircontacto', 'uses' => 'ClientesController@aniadircontacto'));
     Route::get('/clientes/mostrar/{id}', array('as' => 'clientes.mostrar', 'uses' => 'ClientesController@mostrar'));
     Route::post('/clientes/actualizar', array('as' => 'clientes.actualizar', 'uses' => 'ClientesController@actualizar'));
     Route::get('/clientes/eliminar/{id}', array('as' => 'clientes.eliminar', 'uses' => 'ClientesController@eliminar'));
@@ -48,6 +49,10 @@ Route::group(array('before' => 'admin'), function()
     Route::get('/usuarios',array('as' => 'usuarios.index', 'uses' => 'UsuariosController@index'));
     Route::get('/usuarios/crear',array('as' => 'usuarios.crear', 'uses' => 'UsuariosController@crear'));
     Route::post('/usuarios',array('as' => 'usuarios.guardar', 'uses' => 'UsuariosController@guardar'));
+    Route::get('/usuarios/eliminar/{id}',array('as' => 'usuarios.eliminar', 'uses' => 'UsuariosController@eliminar'));
+    Route::get('/usuarios/editar/{id}',array('as' => 'usuarios.editar', 'uses' => 'UsuariosController@editar'));
+    Route::post('/usuarios/actualizar',array('as' => 'usuarios.actualizar', 'uses' => 'UsuariosController@actualizar'));
+    Route::get('/usuarios/mostrar/{id}',array('as' => 'usuarios.mostrar', 'uses' => 'UsuariosController@mostrar'));
 });
 
 

@@ -25,11 +25,11 @@
 					Datos Cliente
 				</div>
 				<div class="panel-options">
-				    <a href="{{URL::route('clientes.editar', array('id' => $clientes->id))}}" class="btn btn-default btn-sm btn-icon icon-left">
-                          <i class="entypo-pencil"></i>Editar
+				     <a href="{{URL::route('clientes.editar', array('id' => $clientes->id))}}">
+                       <button type="button" class="btn btn-default btn-sm btn-icon icon-left"><i class="entypo-pencil"></i>Editar</button>
                     </a>
-                    <a href="{{URL::route('clientes.eliminar', array('id' => $clientes->id ))}}" class="btn btn-danger btn-sm btn-icon icon-left">
-                    	  <i class="entypo-cancel"></i>Eliminar
+                    <a href="{{URL::route('clientes.eliminar', array('id' => $clientes->id ))}}">
+                    	  <button type="button" class="btn btn-danger btn-sm btn-icon icon-left"><i class="entypo-cancel"></i>Editar</button>
                     </a>
 				</div>
 			</div>
@@ -56,11 +56,6 @@
 
 					<div class="form-group">
 
-					    <label for="field-2" class="col-sm-2 control-label">Dni: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "empresa", $clientes->empresa, array("class" => "form-control", "placeholder"=>"Empresa", "id"=>"field-2",'disabled'))}}
-                        </div>
-
 					    <label for="field-2" class="col-sm-2 control-label">Cif: </label>
                         <div class="col-sm-3">
                         {{Form::input("text", "dni", $clientes->cif, array("class" => "form-control", "placeholder"=>"Cif", "id"=>"field-2",'disabled'))}}
@@ -71,23 +66,10 @@
                         <div class="col-sm-3">
                         {{Form::input("text", "nombre", $clientes->nombre, array("class" => "form-control", "placeholder"=>"Nombre", "id"=>"field-1", 'disabled'))}}
                         </div>
-						 <label for="field-3" class="col-sm-2 control-label">Apellidos: </label>
-                         <div class="col-sm-3">
-                         {{Form::input("text", "apell1", $clientes->apell1 .' '. $clientes->apell2, array("class" => "form-control", "placeholder"=>"Apellidos", "id"=>"field-3",'disabled'))}}
-                         </div>
 
 				    </div>
 
-				    <div class="form-group">
-                        <label for="field-5" class="col-sm-2 control-label">Teléfono: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "telefono", $clientes->telefono, array("class" => "form-control", "placeholder"=>"Teléfono", "id"=>"field-5",'disabled'))}}
-                        </div>
-                       <label for="field-5" class="col-sm-2 control-label">Correo: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "email", $clientes->email, array("class" => "form-control", "placeholder"=>"Correo", "id"=>"field-5",'disabled'))}}
-                        </div>
-                    </div>
+
                      <div class="form-group">
                         <label for="field-6" class="col-sm-2 control-label">Dirección: </label>
                         <div class="col-sm-3">
@@ -127,12 +109,6 @@
 
 	</div>
 </div>
-@if(Session::has('exito'))
-            <div class="exito mensajes">{{ Session::get('exito') }}</div>
-     @endif
-@if(Session::has('error'))
-            <div class="error mensajes">{{ Session::get('error') }}</div>
-     @endif
 <div class="row">
 	<div class="col-md-12">
 <div class="panel panel-primary" data-collapsed="0">
@@ -208,6 +184,7 @@
 
 	</div>
 </div>
+
 @stop
 
 

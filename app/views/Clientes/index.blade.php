@@ -21,22 +21,27 @@
              	<thead>
              		<tr>
              			<th>Id</th>
+             			<th>Cif</th>
              			<th>Empresa</th>
-             			<th>Nombre</th>
-             			<th>Apellidos</th>
-             			<th>Email</th>
+             			<th>Localidad</th>
+             			<th>Grupo</th>
              			<th>Acciones</th>
              		</tr>
              	</thead>
 
              	<tbody>
+             	<?$grupos=Grupo::select('id', 'nombre')->get();?>
 <?php foreach($paginacion as $fila): ?>
 		<tr>
 			<td>{{$fila->id}}</td>
+			<td>{{$fila->cif}}</td>
 			<td>{{$fila->empresa}}</td>
-			<td>{{$fila->nombre}}</td>
-			<td>{{$fila->apell1 .' '. $fila->apell2}}</td>
-			<td>{{$fila->email}}</td>
+			<td>{{$fila->localidad}}</td>
+			@foreach($grupos as $muestra)
+			   <? if($fila->grupo == $muestra->id){?>
+			<td>{{$muestra->nombre}}</td>
+			<?}?>
+			@endforeach
 			<td>
 				<a href="{{URL::route('clientes.editar', array('id' => $fila['id']))}}" class="btn btn-default btn-sm btn-icon icon-left">
 					<i class="entypo-pencil"></i>

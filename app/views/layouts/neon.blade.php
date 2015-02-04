@@ -17,15 +17,15 @@
 
 
 	<link rel="stylesheet" href="/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css"  id="style-resource-1">
-	<link rel="stylesheet" href="/neon/assets/css/font-icons/entypo/css/entypo.css"  id="style-resource-2">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic"  id="style-resource-3">
-	<link rel="stylesheet" href="/neon/assets/css/bootstrap.css"  id="style-resource-4">
-	<link rel="stylesheet" href="/neon/assets/css/neon.core.min.css"  id="style-resource-5">
-	<link rel="stylesheet" href="/neon/assets/css/neon-core.css"  id="style-resource-9">
-	<link rel="stylesheet" href="/neon/assets/css/neon-theme.css"  id="style-resource-6">
-	<link rel="stylesheet" href="/neon/assets/css/neon-forms.css"  id="style-resource-7">
-	<link rel="stylesheet" href="/neon/assets/css/custom.css"  id="style-resource-8">
-	<link rel="stylesheet" href="/neon/assets/css/cajas.css"  id="style-resource-9">
+    	<link rel="stylesheet" href="/neon/assets/css/font-icons/entypo/css/entypo.css"  id="style-resource-2">
+    	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic"  id="style-resource-3">
+    	<link rel="stylesheet" href="/neon/assets/css/bootstrap.css"  id="style-resource-4">
+    	<link rel="stylesheet" href="/neon/assets/css/neon.core.min.css"  id="style-resource-5">
+    	<link rel="stylesheet" href="/neon/assets/css/neon-core.css"  id="style-resource-9">
+    	<link rel="stylesheet" href="/neon/assets/css/neon-theme.css"  id="style-resource-6">
+    	<link rel="stylesheet" href="/neon/assets/css/neon-forms.css"  id="style-resource-7">
+    	<link rel="stylesheet" href="/neon/assets/css/custom.css"  id="style-resource-8">
+    	<link rel="stylesheet" href="/neon/assets/css/cajas.css"  id="style-resource-9">
 
 <!--Para las cajas de mensajes-->
 <script type="text/javascript" src="/neon/assets/js/jquery-1.2.6.js"></script>
@@ -160,7 +160,7 @@ $(document).ready(function(){
         </li>
         <?
         $tipo=Auth::user()->get()->tipo;
-        if($tipo == 'admin'){
+        if($tipo == 'Administrador'){
         ?>
         <li class="<? echo $secciones['configuracion']; ?>">
             <a href="http://demo.neontheme.com/dashboard/main/"><i class="entypo-tools"></i><span>Configuración</span></a>
@@ -274,23 +274,24 @@ $(document).ready(function(){
 	<link rel="stylesheet" href="/neon/assets/js/select2/select2.css"  id="style-resource-3">
 
 	<script src="/neon/assets/js/gsap/main-gsap.js" id="script-resource-1"></script>
-	<script src="/neon/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js" id="script-resource-2"></script>
-	<script src="/neon/assets/js/bootstrap.js" id="script-resource-3"></script>
-	<script src="/neon/assets/js/joinable.js" id="script-resource-4"></script>
-	<script src="/neon/assets/js/resizeable.js" id="script-resource-5"></script>
-	<script src="/neon/assets/js/neon-api.js" id="script-resource-6"></script>
-	<script src="/neon/assets/js/cookies.min.js" id="script-resource-7"></script>
-	<script src="/neon/assets/js/jquery.dataTables.min.js" id="script-resource-8"></script>
-	<script src="/neon/assets/js/datatables/TableTools.min.js" id="script-resource-9"></script>
-	<script src="/neon/assets/js/dataTables.bootstrap.js" id="script-resource-10"></script>
-	<script src="/neon/assets/js/datatables/jquery.dataTables.columnFilter.js" id="script-resource-11"></script>
-	<script src="/neon/assets/js/datatables/lodash.min.js" id="script-resource-12"></script>
-	<script src="/neon/assets/js/datatables/responsive/js/datatables.responsive.js" id="script-resource-13"></script>
-
-	<script src="/neon/assets/js/select2/select2.min.js" id="script-resource-14"></script>
-    <script src="/neon/assets/js/jquery.inputmask.bundle.min.js" id="script-resource-15"></script>
-	<script src="/neon/assets/js/neon-custom.js" id="script-resource-16"></script>
-	<script src="/neon/assets/js/neon-demo.js" id="script-resource-17"></script>
+    	<script src="/neon/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js" id="script-resource-2"></script>
+    	<script src="/neon/assets/js/bootstrap.js" id="script-resource-3"></script>
+    	<script src="/neon/assets/js/joinable.js" id="script-resource-4"></script>
+    	<script src="/neon/assets/js/resizeable.js" id="script-resource-5"></script>
+    	<script src="/neon/assets/js/neon-api.js" id="script-resource-6"></script>
+    	<script src="/neon/assets/js/cookies.min.js" id="script-resource-7"></script>
+    	<script src="/neon/assets/js/jquery.dataTables.min.js" id="script-resource-8"></script>
+    	<script src="/neon/assets/js/datatables/TableTools.min.js" id="script-resource-9"></script>
+    	<script src="/neon/assets/js/dataTables.bootstrap.js" id="script-resource-10"></script>
+    	<script src="/neon/assets/js/datatables/jquery.dataTables.columnFilter.js" id="script-resource-11"></script>
+    	<script src="/neon/assets/js/datatables/lodash.min.js" id="script-resource-12"></script>
+    	<script src="/neon/assets/js/datatables/responsive/js/datatables.responsive.js" id="script-resource-13"></script>
+        <script src="/neon/assets/js/bootstrap-switch.min.js"></script>
+        <script src="/neon/assets/js/fileinput.js"></script>
+    	<script src="/neon/assets/js/select2/select2.min.js" id="script-resource-14"></script>
+        <script src="/neon/assets/js/jquery.inputmask.bundle.min.js" id="script-resource-15"></script>
+    	<script src="/neon/assets/js/neon-custom.js" id="script-resource-16"></script>
+    	<script src="/neon/assets/js/neon-demo.js" id="script-resource-17"></script>
 
 
 

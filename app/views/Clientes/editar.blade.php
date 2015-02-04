@@ -45,49 +45,23 @@
                          @endif
 
 					<div class="form-group">
+                        <label for="field-1" class="col-sm-2 control-label">Cif: </label>
+                        <div class="col-sm-3">
+                        {{Form::input("text", "cif", $clientes->cif, array("class" => "form-control", "placeholder"=>"Cif", "id"=>"field-1"))}}
+                        </div>
+                    </div>
+					<div class="form-group">
 					    <label for="field-2" class="col-sm-2 control-label">Empresa: </label>
                         <div class="col-sm-3">
                         {{Form::input("text", "empresa", $clientes->empresa, array("class" => "form-control", "placeholder"=>"Empresa", "id"=>"field-2"))}}
                         </div>
-
-						<label for="field-1" class="col-sm-2 control-label">Cif: </label>
-						<div class="col-sm-3">
-				        {{Form::input("text", "cif", $clientes->cif, array("class" => "form-control", "placeholder"=>"Cif", "id"=>"field-1"))}}
-						</div>
-
-				    </div>
-				    <div class="form-group">
-				    <label for="field-2" class="col-sm-2 control-label">Nombre: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "nombre", $clientes->nombre, array("class" => "form-control", "placeholder"=>"Nombre", "id"=>"field-2"))}}
-                        </div>
-                     </div>
-				    <div class="form-group">
-				        <label for="field-3" class="col-sm-2 control-label">1º Apellido: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "apell1", $clientes->apell1, array("class" => "form-control", "placeholder"=>"1º Apellido", "id"=>"field-3"))}}
-                        </div>
-						<label for="field-4" class="col-sm-2 control-label">2º Apellido: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "apell2", $clientes->apell2, array("class" => "form-control", "placeholder"=>"2º Apellido", "id"=>"field-4"))}}
-                        </div>
-					</div>
-				    <div class="form-group">
-                        <label for="field-5" class="col-sm-2 control-label">Teléfono: </label>
-                        <div class="col-sm-3">
-                        {{Form::input("text", "telefono", $clientes->telefono, array("class" => "form-control", "placeholder"=>"Teléfono", "id"=>"field-5"))}}
-                        </div>
-                        <label for="field-5" class="col-sm-2 control-label">Correo: </label>
-                         <div class="col-sm-3">
-                         {{Form::input("text", "email", $clientes->email, array("class" => "form-control", "placeholder"=>"Correo", "id"=>"field-5"))}}
-                         </div>
                     </div>
                      <div class="form-group">
                         <label for="field-5" class="col-sm-2 control-label">Dirección: </label>
                         <div class="col-sm-3">
                         {{Form::input("text", "direccion", $clientes->direccion, array("class" => "form-control", "placeholder"=>"Dirección", "id"=>"field-5"))}}
                         </div>
-                        <label for="field-6" class="col-sm-2 control-label">Localidad: </label>
+                        <label for="field-6" class="col-sm-1 control-label">Localidad: </label>
                         <div class="col-sm-3">
                         {{Form::input("text", "localidad", $clientes->localidad, array("class" => "form-control","placeholder"=>"Localidad",  "id"=>"field-6"))}}
                         </div>
@@ -102,8 +76,13 @@
                          <label for="field-5" class="col-sm-2 control-label">Pertenece a: </label>
                          <div class="col-sm-3">
                          <select id="grupo" name="grupo" class="form-control" onchange="activargruponuevo(this);">
-                             <option value="" disabled selected>Seleccione un grupo</option>
-                             <option value='*'>Crear nuevo grupo</option>
+                               <?$grupos= Grupo::select('id','nombre')->get();?>
+                                @foreach($grupos as $mostrar)
+                                   <? if($clientes->grupo == $mostrar->id){?>
+                                   echo "<option value='{{$mostrar->nombre}}' disabled selected>{{$mostrar->nombre}}</option>";
+                                   <?}?>
+                                @endforeach
+                             <option value='*'>Crear nuevo grupo ----></option>
 
                               {{$registros= Grupo::distinct()->groupBy('nombre')->get()}};
 
@@ -118,11 +97,11 @@
                       </div>
 
 					<div class="form-group">
-						<div class="col-sm-offset-5 col-sm-5">
+					    <div class="col-sm-offset-5 col-sm-5">
 						    {{Form::input("hidden", "_token", csrf_token())}}
 						    {{Form::input("hidden", "id", $clientes->id)}}
                             {{Form::input("submit", null, "Guardar cambios", array("class" => "btn btn-default"))}}
-                        </div>
+                         </div>
 					{{Form::close()}}
 				</form>
 
@@ -132,12 +111,25 @@
 
 	</div>
 </div>
+</div>
+
+
+
+
 <script type="text/javascript">
 function activargruponuevo(selec) {
     if (selec.value == '*') {
+    document.getElementById('nuevogrupo').style.display = 'block';
     document.getElementById('nuevogrupo').disabled = false;
+    }else{
+    document.getElementById('nuevogrupo').disabled = true;
+    document.getElementById('nuevogrupo').style.display = 'none';
     }
 }
+
+window.onload = function(){
+   document.getElementById('nuevogrupo').style.display = 'none';
+   }
 </script>
 @stop
 

@@ -107,7 +107,7 @@ Route::filter('guest_user', function()
 Route::filter('admin', function()
 {
     $tipo=Auth::user()->get()->tipo;
-    if ($tipo != 'admin')
+    if ($tipo != 'Administrador')
     {
         return Response::make('Unauthorized', 401);
     }
