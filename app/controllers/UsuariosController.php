@@ -64,7 +64,7 @@ class UsuariosController extends BaseController {
                 'email' => Input::get('email'),
                 'password' => Hash::make(Input::get('password')),
                 'tipo' => Input::get('tipo'),
-                'active' => '1',
+                'activo' => '1',
             ));
 
 
@@ -82,7 +82,6 @@ class UsuariosController extends BaseController {
         $rules = array(
             "user" => "required|unique:usuarios,user,$id",
             "email" => "required|email",
-            "tipo" => "required",
         );
 
 
@@ -94,7 +93,6 @@ class UsuariosController extends BaseController {
             "user.required" => "El nombre del usuario es requerido",
             "email.required" => "El correo es requerido",
             "email.email" => "El correo no tiene un formato adecuado",
-            "tipo.required" => "El tipo de usuario es requerido",
         );
 
 
@@ -105,8 +103,10 @@ class UsuariosController extends BaseController {
             $usuarios =  Usuarios::find($id);
             $usuarios->user = Input::get('user');
             $usuarios->email = Input::get('email');
+            if($usuarios->tipo!='Administrador'){
             $usuarios->tipo = Input::get('tipo');
-            $usuarios->active = Input::get('activo');
+            $usuarios->activo = Input::get('activo');
+            }
 
 
             $usuarios->save();

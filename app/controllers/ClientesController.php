@@ -22,6 +22,13 @@ class ClientesController extends BaseController {
         return View::make('clientes.mostrar', array('clientes' => $clientes));
     }
 
+    public function vercontactos($id)
+    {
+
+        $clientes =  Clientes::find($id);
+        return View::make('clientes.vercontactos', array('clientes' => $clientes));
+    }
+
     public function editar($id)
     {
 
@@ -116,7 +123,7 @@ class ClientesController extends BaseController {
         if(Input::file("documento")==NULL){
             $ruta=NULL;
         }else{
-            $ruta = Input::file("documento")->getClientOriginalName();
+            $ruta = Funciones::sanear_string(Input::file("documento")->getClientOriginalName());
         }
         $id = Input::get("id");
 
@@ -144,7 +151,7 @@ class ClientesController extends BaseController {
                 'ruta' => $ruta,
             ));
 
-            $file->move("documentos/" . $id, $file->getClientOriginalName());
+            $file->move("documentos/" . $id, Funciones::sanear_string($file->getClientOriginalName()));
             $documentos = Documentos::all();
             Event::fire('auditoria', array($documentos->last()->id, Auth::user()->get()->user, $documentos->last(), 'Documentos', 'Alta'));
             return Redirect::action('ClientesController@mostrar', array('id' => $id))->with('exito','El archivo se ha subido con éxito' );
@@ -174,7 +181,14 @@ class ClientesController extends BaseController {
         }
 
         File::deleteDirectory("documentos/".$id);
-        Clientes::find($id)->delete();
+
+        $contactos=Contactos::where('id_cli','=',$id)->get();
+        foreach($contactos as $contacto)
+        {
+                Event::fire('auditoria', array(($contacto->id), Auth::user()->get()->user, Contactos::find($contacto->id), 'Contactos', 'Baja'));
+                Contactos::find($contacto->id)->delete();
+        }
+        Contactos::find($id)->delete();
 
         return Redirect::action('ClientesController@index');
     }
@@ -222,6 +236,17 @@ class ClientesController extends BaseController {
         } else {
             return Redirect::action('ClientesController@mostrar', array('id' => $id_cli))->withErrors($validator);
         }
+    }
+
+     public function eliminarcontacto($id)
+    {
+        $id_cli=Contactos::find($id)->id_cli;
+        
+        Event::fire('auditoria', array($id, Auth::user()->get()->user, Contactos::find($id), 'Contactos', 'Baja'));
+        Contactos::find($id)->delete();
+
+        return Redirect::action('ClientesController@mostrar', array('id' => $id_cli))->with('exito','La persona de contacto ha sido eliminada correctamente' );
+
     }
 
     public function descargar($id)

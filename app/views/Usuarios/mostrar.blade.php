@@ -32,9 +32,13 @@
 				    <a href="{{URL::route('usuarios.editar', array('id' => $usuarios->id))}}" class="btn btn-default btn-sm btn-icon icon-left">
                           <i class="entypo-pencil"></i>Editar
                     </a>
-                    <a href="{{URL::route('usuarios.eliminar', array('id' => $usuarios->id ))}}" class="btn btn-danger btn-sm btn-icon icon-left">
-                    	  <i class="entypo-cancel"></i>Eliminar
+                    {{--Eliminar--}}
+                  @if (Auth::user()->get()->id != $usuarios->id)
+                  <a href="{{URL::route('usuarios.eliminar', array('id' => $usuarios->id))}}" class="btn btn-danger btn-sm btn-icon icon-left delete-event" data-title="¿Me lo puedes confirmar?", data-content="¿Estás seguro de querer eliminar los datos?" onClick="return false;">
+                      <i class="entypo-cancel"></i>
+                      Eliminar
                     </a>
+                  @endif
 				</div>
 			</div>
 
@@ -67,10 +71,10 @@
                         <label class="col-md-4 control-label">Activo</label>
                             <div class="col-md-4">
                                 <div class="make-switch" data-text-label="<i class='entypo-user'></i>">
-                                <? if($usuarios->active=='1'){?>
-                                {{Form::checkbox("activo", '1', true, array('disabled'))}}
+                                <? if($usuarios->activo=='1'){?>
+                                {{Form::checkbox("activo", '1', true)}}
                                 <?}else{?>
-                                {{Form::checkbox("activo", '1', false, array('disabled'))}}
+                                {{Form::checkbox("activo", '1', false)}}
                                  <?}?>
                                 </div>
                             </div>

@@ -38,18 +38,19 @@
 				</div>
 				<div class="panel-options">
 
-				    <button type="button" class="btn btn-green btn-sm btn-icon icon-left" onclick="nuevodocumento();">
-                          <i class="entypo-up"></i>Subir documento</button>
+				    <a class="btn btn-green btn-sm btn-icon icon-left" onclick="nuevodocumento();">
+                          <i class="entypo-up"></i>Subir documento</a>
 
 
-                       <button type="button" class="btn btn-default btn-sm btn-icon icon-left" onclick="nuevocontacto();">
-                        <i class="entypo-user-add"></i>Añadir contacto</button>
+                       <a class="btn btn-default btn-sm btn-icon icon-left" onclick="nuevocontacto();">
+                        <i class="entypo-user-add"></i>Añadir contacto</a>
 
-				     <a href="{{URL::route('clientes.editar', array('id' => $clientes->id))}}">
-                       <button type="button" class="btn btn-default btn-sm btn-icon icon-left"><i class="entypo-pencil"></i>Editar</button>
+				     <a href="{{URL::route('clientes.editar', array('id' => $clientes->id))}}" class="btn btn-default btn-sm btn-icon icon-left">
+                          <i class="entypo-pencil"></i>Editar
                     </a>
-                    <a href="{{URL::route('clientes.eliminar', array('id' => $clientes->id ))}}">
-                    	  <button type="button" class="btn btn-danger btn-sm btn-icon icon-left"><i class="entypo-cancel"></i>Eliminar</button>
+                    <a href="{{URL::route('clientes.eliminar', array('id' => $clientes->id))}}" class="btn btn-danger btn-sm btn-icon icon-left delete-event" data-title="¿Me lo puedes confirmar?", data-content="¿Estás seguro de querer eliminar los datos?" onClick="return false;">
+                      <i class="entypo-cancel"></i>
+                      Eliminar
                     </a>
 				</div>
 			</div>
@@ -116,7 +117,7 @@
 
 	</div>
 </div>
-<div class="row" id="aniadirdocumento">
+<div class="row" id="aniadirdocumento" style="display:none;">
 	<div class="col-md-12">
 <div class="panel panel-primary" data-collapsed="0">
 
@@ -163,7 +164,7 @@
 </div>
 
 
-<div class="row" id="aniadircontacto">
+<div class="row" id="aniadircontacto" >
 	<div class="col-md-12">
 <div class="panel panel-primary" data-collapsed="0">
 
@@ -270,12 +271,12 @@
             			<td>{{$fila->nombre}}</td>
             			<td>{{$fila->apell1 . " " . $fila->apell2}} </td>
             			<td>{{$fila->telefono}}</td>
-            			<td>{{$fila->email}}</td>
+            			<td>{{HTML::mailto($fila->email)}}</td>
             			<td>
-            				<a href="{{URL::route('clientes.eliminar', array('id' => $fila['id'] ))}}" class="btn btn-danger btn-sm btn-icon icon-left">
-            				    <i class="entypo-cancel"></i>
-            				    Eliminar
-            				</a>
+            				<a href="{{URL::route('clientes.eliminarcontacto', array('id' => $fila->id))}}" class="btn btn-danger btn-sm btn-icon icon-left delete-event" data-title="¿Me lo puedes confirmar?", data-content="¿Estás seguro de querer eliminar los datos?" onClick="return false;">
+                      <i class="entypo-cancel"></i>
+                      Eliminar
+                    </a>
             			</td>
             		</tr>
             <?php endforeach; ?>
@@ -314,15 +315,27 @@
 
                                 foreach ($documentos as $documento)
                                     {
+                                    
+                                   
+                                    $rutabbdd=Funciones::sanear_string($documento->ruta);
+                                    $archivo=Funciones::sanear_string(utf8_decode($file));
 
-                                        if($documento->ruta == $file && $documento->idcliente == $clientes->id){
+
+                                        if($rutabbdd == $archivo && $documento->idcliente == $clientes->id){
                                         echo "<div class='form-group'>";
                                         $date = new DateTime($documento->created_at);
                                         $fecha=$date->format('d/m/Y');
 
                                         echo "<div class='col-sm-6'><strong>Documento:</strong> ".$documento->nombredocumento." <br> <strong>Archivo:</strong> ".$file.  " <br> <strong>Creado: </strong>".$fecha." </div>
-                                        <div class='col-sm-2'><a href=".URL::route('clientes.descargar', array('id' => $documento->id ))."><button type='button' class='btn btn-success'> <i class='entypo-down'></i>Descargar </button></a></div>
-                                        <div class='col-sd-4'><a href=".URL::route('clientes.eliminardocumento', array('id' => $documento->id ))."><button type='button' class='btn btn-white'> <i class='entypo-trash'></i>Eliminar </button></a></div><br>";
+                                        <div class='col-sd-4'>
+                                       <a href=".URL::route('clientes.descargar', array('id' => $documento->id))." class='btn btn-green btn-sm btn-icon icon-left'>
+                                    <i class=entypo-download></i>
+                                Descargar
+                             </a>
+                                        <a href=".URL::route('clientes.eliminardocumento', array('id' => $documento->id))." class='btn btn-danger btn-sm btn-icon icon-left delete-event' data-title='¿Me lo puedes confirmar?', data-content='¿Estás seguro de querer eliminar los datos?' onClick='return false;'>
+                                    <i class=entypo-cancel></i>
+                                Eliminar
+                             </a></div><br>";
                                         echo "</div>";
                                         }
                                     }
@@ -361,10 +374,6 @@ function cancelar() {
     document.getElementById('aniadirdocumento').style.display  = 'none';
     document.getElementById('aniadircontacto').style.display  = 'none';
 }
-window.onload = function(){
-   document.getElementById('aniadirdocumento').style.display = 'none';
-   document.getElementById('aniadircontacto').style.display = 'none';
-   }
 </script>
 @stop
 

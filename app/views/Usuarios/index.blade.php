@@ -38,23 +38,27 @@
 			<td>{{$fila->id}}</td>
 			<td>{{$fila->user}}</td>
 			<td>{{$fila->email}}</td>
-			<td><? if($fila->active==1){echo 'Si';}else{echo 'No';}?></td>
+			<td><? if($fila->activo==1){echo 'Si';}else{echo 'No';}?></td>
 			<td>{{$fila->tipo}}</td>
 			<td>
-				<a href="{{URL::route('usuarios.editar', array('id' => $fila['id']))}}" class="btn btn-default btn-sm btn-icon icon-left">
-					<i class="entypo-pencil"></i>
-					Editar
-				</a>
-				<a href="{{URL::route('usuarios.eliminar', array('id' => $fila['id'] ))}}" class="btn btn-danger btn-sm btn-icon icon-left">
-				    <i class="entypo-cancel"></i>
-				    Eliminar
-				</a>
+				{{-- Editar --}}
+      <a href="{{URL::route('usuarios.editar', array('id' => $fila['id']))}}" class="btn btn-default btn-sm btn-icon icon-left">
+          <i class="entypo-pencil"></i>
+          Editar
+        </a>
 
-
-				<a href="{{URL::route('usuarios.mostrar', array('id' => $fila['id'] ))}}" class="btn btn-info btn-sm btn-icon icon-left">
-					<i class="entypo-info"></i>
-					Ficha
-				</a>
+      {{--Eliminar--}}
+      @if (Auth::user()->get()->id == $fila['id'])
+      <a href="{{URL::route('usuarios.eliminar', array('id' => $fila['id']))}}" class="btn btn-danger btn-sm btn-icon icon-left delete-event" data-title="¿Me lo puedes confirmar?", data-content="¿Estás seguro de querer eliminar los datos?" onClick="return false;" disabled>
+          <i class="entypo-cancel"></i>
+          Eliminar
+        </a>
+      @else
+      <a href="{{URL::route('usuarios.eliminar', array('id' => $fila['id']))}}" class="btn btn-danger btn-sm btn-icon icon-left delete-event" data-title="¿Me lo puedes confirmar?", data-content="¿Estás seguro de querer eliminar los datos?" onClick="return false;">
+          <i class="entypo-cancel"></i>
+          Eliminar
+        </a>
+      @endif
 			</td>
 		</tr>
 <?php endforeach; ?>

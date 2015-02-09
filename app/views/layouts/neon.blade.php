@@ -166,7 +166,7 @@ $(document).ready(function(){
             <a href="http://demo.neontheme.com/dashboard/main/"><i class="entypo-tools"></i><span>Configuración</span></a>
                 <ul>
                     <li>
-                        <a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-doc-text"></i><span>Datos de Empresa</span></a>
+                        <a href="{{URL::route('empresa.index')}}"><i class="entypo-doc-text"></i><span>Datos de Empresa</span></a>
                     </li>
                     <li>
                         <a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-mail"></i><span>Configurar Correo</span></a>
@@ -206,7 +206,7 @@ $(document).ready(function(){
 					
 					<!-- Profile sub-links -->
 					<li>
-						<a href="http://demo.neontheme.com/extra/timeline/">
+						<a href="{{URL::route('usuarios.editar',array('id' => Auth::user()->get()->id )) }}">
 							<i class="entypo-user"></i>
 							Editar Perfil
 						</a>
@@ -263,10 +263,49 @@ $(document).ready(function(){
 	
 
 	</div>
+<!-- Modal 1 (Modificar)-->
+                  <div class="modal fade" id="editar">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title">¿Me lo puedes confirmar?</h4>
+                        </div>
+                        
+                        <div class="modal-body">
+                          Estás seguro de querer modificar los datos?
+                        </div>
+                        
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">No, por favor no lo envies!</button>
+                          <button type="submit" class="btn btn-success" onclick="enviarformulario();">Si, Modificar!</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
 
+<script type="text/javascript">
+function enviarformulario() {
+    document.getElementById("formulario-modal").submit();
+}
 
 
+jQuery('.delete-event').click(function(evnt) {
+            var href = jQuery(this).attr('href');
+            var message = jQuery(this).attr('data-content');
+            var title = jQuery(this).attr('data-title');
+
+            if (!jQuery('#dataConfirmModal').length) {
+                jQuery('body').append('<div id="dataConfirmModal" class="modal fade" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="dataConfirmLabel">'+title+'</h3></div><div class="modal-body">'+message+'</div><div class="modal-footer"><button class="btn btn-success" data-dismiss="modal" aria-hidden="true">No, Por favor no lo envies!</button><a class="btn btn-danger" id="dataConfirmOK">Si, Eliminalo!</a></div></div></div></div>');
+            } 
+
+            jQuery('#dataConfirmModal').find('.modal-body').text(message);
+            jQuery('#dataConfirmOK').attr('href', href);
+            jQuery('#dataConfirmModal').modal({show:true});
+})
+</script>
 
 
 <link rel="stylesheet" href="/neon/assets/js/datatables/responsive/css/datatables.responsive.css"  id="style-resource-1">

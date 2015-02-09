@@ -25,18 +25,28 @@ Route::group(array('before' => 'guest_user'), function() {
 Route::group(array('before' => 'auth_user'), function() {
 
     //Clientes
-    Route::get('/clientes',array('as' => 'clientes.index', 'uses' => 'ClientesController@index'));
-    Route::get('/clientes/crear',array('as' => 'clientes.crear', 'uses' => 'ClientesController@crear'));
-    Route::post('/clientes',array('as' => 'clientes.guardar', 'uses' => 'ClientesController@guardar'));
-    Route::post('/clientes/documento', array('as' => 'clientes.subirdocumento', 'uses' => 'ClientesController@subirdocumento'));
-    Route::get('/clientes/editar/{id}', array('as' => 'clientes.editar', 'uses' => 'ClientesController@editar'));
-    Route::post('/clientes/editar/{id}', array('as' => 'clientes.aniadircontacto', 'uses' => 'ClientesController@aniadircontacto'));
-    Route::get('/clientes/mostrar/{id}', array('as' => 'clientes.mostrar', 'uses' => 'ClientesController@mostrar'));
-    Route::post('/clientes/actualizar', array('as' => 'clientes.actualizar', 'uses' => 'ClientesController@actualizar'));
-    Route::get('/clientes/eliminar/{id}', array('as' => 'clientes.eliminar', 'uses' => 'ClientesController@eliminar'));
-    Route::get('/clientes/documento/eliminar/{id}', array('as' => 'clientes.eliminardocumento', 'uses' => 'ClientesController@eliminardocumento'));
-    Route::get('/clientespdf', array('as' => 'clientespdf', 'uses' => 'ClientesController@clientespdf'));
-    Route::get('/descargar/{id}', array('as' => 'clientes.descargar', 'uses' => 'ClientesController@descargar'));
+    Route::group(array('prefix' => 'clientes'), function() {
+        Route::get('/',array('as' => 'clientes.index', 'uses' => 'ClientesController@index'));
+        Route::get('/crear',array('as' => 'clientes.crear', 'uses' => 'ClientesController@crear'));
+        Route::post('/',array('as' => 'clientes.guardar', 'uses' => 'ClientesController@guardar'));
+        Route::post('/documento', array('as' => 'clientes.subirdocumento', 'uses' => 'ClientesController@subirdocumento'));
+        Route::get('/editar/{id}', array('as' => 'clientes.editar', 'uses' => 'ClientesController@editar'));
+        Route::post('/editar/{id}', array('as' => 'clientes.aniadircontacto', 'uses' => 'ClientesController@aniadircontacto'));
+        Route::get('/mostrar/{id}', array('as' => 'clientes.mostrar', 'uses' => 'ClientesController@mostrar'));
+        Route::post('/actualizar', array('as' => 'clientes.actualizar', 'uses' => 'ClientesController@actualizar'));
+        Route::get('/eliminar/{id}', array('as' => 'clientes.eliminar', 'uses' => 'ClientesController@eliminar'));
+        Route::get('/documento/eliminar/{id}', array('as' => 'clientes.eliminardocumento', 'uses' => 'ClientesController@eliminardocumento'));
+        Route::get('/vercontactos/{id}',array('as' => 'clientes.vercontactos', 'uses' => 'ClientesController@vercontactos'));
+        Route::get('/eliminarcontacto/{id}',array('as' => 'clientes.eliminarcontacto', 'uses' => 'ClientesController@eliminarcontacto'));
+        Route::get('/clientespdf', array('as' => 'clientespdf', 'uses' => 'ClientesController@clientespdf'));
+        Route::get('/descargar/{id}', array('as' => 'clientes.descargar', 'uses' => 'ClientesController@descargar'));
+    });
+    //Rutas para Empresa
+    Route::group(array('prefix' => 'empresa'), function() {
+        Route::get('/', array('as' => 'empresa.index', 'uses' => 'EmpresaController@index'));
+        Route::get('/editar', array('as' => 'empresa.editar', 'uses' => 'EmpresaController@editar'));
+        Route::post('/actualizar', array('as' => 'empresa.actualizar', 'uses' => 'EmpresaController@actualizar'));
+    });
 
     //Otros
     Route::get('/',array('as' => 'index', 'uses' => 'HomeController@index'));
@@ -61,7 +71,7 @@ Route::post('/login', array('before' => 'csrf', function(){
     $user = array(
         'user' => Input::get('usuario'),
         'password' => Input::get('password'),
-        'active' => 1,
+        'activo' => 1,
     );
 
     $remember = Input::get("remember");

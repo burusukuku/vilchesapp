@@ -42,6 +42,7 @@
                                         "action" => "UsuariosController@actualizar",
                                         "role" => "form",
                                         "class" => "form-horizontal",
+                                        "id" => "formulario-modal",
                                         ))}}
 					<div class="form-group">
 					    <label for="field-2" class="col-md-4 control-label">Nombre: </label>
@@ -56,6 +57,7 @@
 						</div>
 
 				    </div>
+            <? if(Auth::user()->get()->id!=$usuarios->id){?>
 				    <div class="form-group">
 				    <label for="field-2" class="col-md-4 control-label">Tipo: </label>
                         <div class="col-md-4">
@@ -66,15 +68,15 @@
                          </select>
                          </div>
                      </div>
-                     <? if(Auth::user()->get()->id!=$usuarios->id){?>
+                     
 					<div class="form-group">
                         <label class="col-md-4 control-label">Activo</label>
                             <div class="col-md-4">
                                 <div class="make-switch" data-text-label="<i class='entypo-user'></i>">
-                                <? if($usuarios->active=='1'){?>
+                                <? if($usuarios->activo=='1'){?>
                                 {{Form::checkbox("activo", '1', true )}}
                                 <?}else{?>
-				                {{Form::checkbox("activo", '1', false)}}
+				                        {{Form::checkbox("activo", '1', false)}}
                                  <?}?>
                                 </div>
                             </div>
@@ -84,7 +86,7 @@
 						<div class="col-sm-offset-5 col-sm-5">
 						    {{Form::input("hidden", "_token", csrf_token())}}
 						    {{Form::input("hidden", "id", $usuarios->id)}}
-                            {{Form::input("submit", null, "Guardar cambios", array("class" => "btn btn-default"))}}
+                            {{Form::input("button", null, "Guardar cambios", array("class" => "btn btn-default", "onclick"=>"jQuery('#editar').modal('show');"))}}
                         </div>
 					{{Form::close()}}
 				</form>

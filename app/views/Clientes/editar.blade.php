@@ -31,6 +31,7 @@
                                         "action" => "ClientesController@actualizar",
                                         "role" => "form",
                                         "class" => "form-horizontal",
+                                        "id" => "formulario-modal"
                                         ))}}
                         @if ($errors->any())
                             <div class="error mensajes">
@@ -100,7 +101,7 @@
 					    <div class="col-sm-offset-5 col-sm-5">
 						    {{Form::input("hidden", "_token", csrf_token())}}
 						    {{Form::input("hidden", "id", $clientes->id)}}
-                            {{Form::input("submit", null, "Guardar cambios", array("class" => "btn btn-default"))}}
+                            {{Form::input("button", null, "Guardar cambios", array("class" => "btn btn-default", "onclick"=>"jQuery('#editar').modal('show');"))}}
                          </div>
 					{{Form::close()}}
 				</form>

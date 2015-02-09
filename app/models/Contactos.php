@@ -14,5 +14,5 @@ class Contactos extends Eloquent  {
      *
      * @var array
      */
-    protected $fillable = array('id_cli','nombre','apell1','apell2','telefono','email','direccion','localidad');
+    protected $fillable = array('id','id_cli','nombre','apell1','apell2','telefono','email','direccion','localidad');
 }

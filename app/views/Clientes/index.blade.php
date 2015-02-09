@@ -43,20 +43,15 @@
 			<?}?>
 			@endforeach
 			<td>
-				<a href="{{URL::route('clientes.editar', array('id' => $fila['id']))}}" class="btn btn-default btn-sm btn-icon icon-left">
-					<i class="entypo-pencil"></i>
-					Editar
-				</a>
-				<a href="{{URL::route('clientes.eliminar', array('id' => $fila['id'] ))}}" class="btn btn-danger btn-sm btn-icon icon-left">
-				    <i class="entypo-cancel"></i>
-				    Eliminar
-				</a>
-
-
 				<a href="{{URL::route('clientes.mostrar', array('id' => $fila['id'] ))}}" class="btn btn-info btn-sm btn-icon icon-left">
 					<i class="entypo-info"></i>
 					Ficha
 				</a>
+
+        <a href="{{URL::route('clientes.vercontactos', array('id' => $fila['id']))}}" class="btn btn-gold btn-sm btn-icon icon-left">
+          <i class="entypo-users"></i>
+          Ver Contactos
+        </a>
 			</td>
 		</tr>
 <?php endforeach; ?>
