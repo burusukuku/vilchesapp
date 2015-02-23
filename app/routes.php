@@ -41,12 +41,62 @@ Route::group(array('before' => 'auth_user'), function() {
         Route::get('/clientespdf', array('as' => 'clientespdf', 'uses' => 'ClientesController@clientespdf'));
         Route::get('/descargar/{id}', array('as' => 'clientes.descargar', 'uses' => 'ClientesController@descargar'));
     });
+    
+    //Rutas para Boletines
+    Route::group(array('prefix' => 'boletin'), function() {
+        Route::get('/',array('as' => 'boletin.index', 'uses' => 'BoletinesController@index'));
+        Route::get('/crear', array('as' => 'boletin.crear', 'uses' => 'BoletinesController@crear'));
+        Route::post('/', array('as' => 'boletin.enviar', 'uses' => 'BoletinesController@enviar'));
+        Route::get('/mostrar/{id}', array('as' => 'boletin.mostrar', 'uses' => 'BoletinesController@mostrar'));
+        Route::get('/eliminarclienteani/{id}', array('as' => 'boletin.eliminarclienteani', 'uses' => 'BoletinesController@eliminarclienteani'));
+        Route::post('/aniadircliente', array('as' => 'boletin.aniadircliente', 'uses' => 'BoletinesController@aniadircliente'));
+        Route::post('/aniadirclienteexc', array('as' => 'boletin.aniadirclienteexc', 'uses' => 'BoletinesController@aniadirclienteexc'));
+        Route::get('/eliminarclienteexc/{id}', array('as' => 'boletin.eliminarclienteexc', 'uses' => 'BoletinesController@eliminarclienteexc'));
+
+
+    });
+
+    Route::get('/grupoexcluidos', function(){
+        $grupo = Input::get('option');
+        if($grupo== '*'){ // si son todos, puede excluir a cualquier persona
+            $clientes=Clientes::all();
+        }else{ // Si elige un grupo, podrá excluir a gente de ese grupo
+        $clientes = Clientes::where('grupo', '=', $grupo)->get();
+        }
+        $opciones = array();
+
+        foreach ($clientes as $cliente) {
+            $opciones += array($cliente->id => $cliente->empresa);
+        }
+
+        return Response::json($opciones);
+
+    });
+
+    Route::get('/grupoaniadidos', function(){
+        $grupo = Input::get('option');
+        if($grupo= '*'){ //si son todos, no debe añadir ninguno adicional
+            $clientes=0;
+        }else{ // Si elige un grupo, solo añadirá gente que no esté en ese grupo
+             $clientes = Clientes::where('grupo', '!=', $grupo)->get();
+        }
+        $opciones = array();
+
+        foreach ($clientes as $cliente) {
+            $opciones += array($cliente->id => $cliente->empresa);
+        }
+
+        return Response::json($opciones);
+
+    });
+
     //Rutas para Empresa
     Route::group(array('prefix' => 'empresa'), function() {
         Route::get('/', array('as' => 'empresa.index', 'uses' => 'EmpresaController@index'));
         Route::get('/editar', array('as' => 'empresa.editar', 'uses' => 'EmpresaController@editar'));
         Route::post('/actualizar', array('as' => 'empresa.actualizar', 'uses' => 'EmpresaController@actualizar'));
     });
+
 
     //Otros
     Route::get('/',array('as' => 'index', 'uses' => 'HomeController@index'));

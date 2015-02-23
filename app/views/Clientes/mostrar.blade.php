@@ -164,7 +164,7 @@
 </div>
 
 
-<div class="row" id="aniadircontacto" >
+<div class="row" id="aniadircontacto" style="display:none;">
 	<div class="col-md-12">
 <div class="panel panel-primary" data-collapsed="0">
 

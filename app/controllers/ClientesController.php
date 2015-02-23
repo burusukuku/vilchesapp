@@ -12,7 +12,7 @@ class ClientesController extends BaseController {
 
     public function crear()
     {
-        return View::make('Clientes.crear');
+        return View::make('clientes.crear');
     }
 
     public function mostrar($id)
@@ -100,14 +100,15 @@ class ClientesController extends BaseController {
         $clientes =  Clientes::find($id);
         $clientes->cif = Input::get('cif');
         $clientes->empresa = Input::get('empresa');
-        $clientes->nombre = Input::get('nombre');
-        $clientes->apell1 = Input::get('apell1');
-        $clientes->apell2 = Input::get('apell2');
         $clientes->direccion = Input::get('direccion');
         $clientes->localidad = Input::get('localidad');
-        $clientes->telefono = Input::get('telefono');
-        $clientes->email = Input::get('email');
-        $clientes->grupo = Input::get('grupo');
+        $clientes->observaciones = Input::get('observaciones');
+
+        $grupo=Input::get('grupo');
+        if($grupo!='') //Si se ha cambiado grupo
+        {
+        $clientes->grupo = $grupo;
+        }
 
         $clientes->save();
 
@@ -261,14 +262,19 @@ class ClientesController extends BaseController {
     {
         $html = '<html><head><meta charset="utf-8"><link rel="stylesheet" href="/neon/assets/css/bootstrap.css"  id="style-resource-4">';
         $html.= '<style type="text/css">
-          @page { margin: 70px 32px; }
+          @page { margin: 70px 60px }
 
           #footer { position: fixed; left: 0px; bottom: -160px; right: 0px; height: 165px;}
           #footer .page:after { content: counter(page, decimal);}
+          .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+            background-color: #f5f5f6;
+            border-bottom-width: 1px;
+            color: black;
+        }
         </style>
     <link rel="stylesheet" href="/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css"  id="style-resource-1">
 	<link rel="stylesheet" href="/neon/assets/css/font-icons/entypo/css/entypo.css"  id="style-resource-2">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic"  id="style-resource-3">
+	<link rel="stylesheet" href="/neon/assets/css/fonts/googlefont.css"  id="style-resource-3">
 	<link rel="stylesheet" href="/neon/assets/css/bootstrap.css"  id="style-resource-4">
 	<link rel="stylesheet" href="/neon/assets/css/neon.core.min.css"  id="style-resource-5">
 	<link rel="stylesheet" href="/neon/assets/css/neon-core.css"  id="style-resource-9">
@@ -278,21 +284,20 @@ class ClientesController extends BaseController {
 	<link rel="stylesheet" href="/neon/assets/css/cajas.css"  id="style-resource-9">
 	</head><body class="page-body"><div class="page-container">';
         $html.= '<div class="imagenlogo" style="text-align: center;"><img src="./neon/assets/images/logo2.png" width="150px" height="70px" /></div>';
-        $html.= '<div class="col-xs-6 col-left"><h3>Clientes:</h3></div>';
+        $html.= '<div class="col-xs-6 col-left"><h3>Listado de Clientes:</h3></div>';
         $html.= '<div class="row">';
-        $html.= '<table class="table table-bordered datatable" id="table-3" aria-describedby="table-3_info" style="width: 800px;">';
+        $html.= '<table class="table table-bordered datatable" id="table-3" aria-describedby="table-3_info" style="width: 650px;">';
         $html.= '<thead><tr>';
-        $html.= '<td><strong>Id</strong></td><td><strong>Dni</strong></td><td><strong>Nombre</strong></td><td><strong>Apellidos</strong></td><td><strong>Teléfono</strong></td><td><strong>Email</strong></td>';
+        $html.= '<td><strong>Id</strong></td><td><strong>Cif</strong></td><td><strong>Empresa</strong></td><td><strong>Localidad</strong></td><td><strong>Grupo</strong></td>';
         $html.= '</tr></thead><tbody>';
-        $cartas = Clientes::orderBy('apell1')->get();
+        $cartas = Clientes::orderBy('empresa')->get();
         foreach ($cartas as $fila) {
             $html.= '<tr>';
             $html.= '<td>'. $fila['id'] .'</td>';
-            $html.= '<td>'. $fila['dni'] .'</td>';
-            $html.= '<td>'. $fila['nombre'] .'</td>';
-            $html.= '<td>'. $fila['apell1'] .' '.$fila['apell2'] .'</td>';
-            $html.= '<td>'. $fila['telefono'] .'</td>';
-            $html.= '<td>'. $fila['email'] .'</td>';
+            $html.= '<td>'. $fila['cif'] .'</td>';
+            $html.= '<td>'. $fila['empresa'] .'</td>';
+            $html.= '<td>'. $fila['localidad'] .'</td>';
+            $html.= '<td>'. Grupo::find($fila['grupo'])->nombre .'</td>';
             $html.= '</tr>';
         }
 

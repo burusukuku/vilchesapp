@@ -12,7 +12,7 @@ class UsuariosController extends BaseController {
 
     public function crear()
     {
-        return View::make('Usuarios.crear');
+        return View::make('usuarios.crear');
     }
 
     public function mostrar($id)

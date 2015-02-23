@@ -21,7 +21,9 @@
 
 			<div class="panel-heading">
 				<div class="panel-title">
-					Contactos del cliente {{$clientes->empresa}}
+					Contactos del cliente <a href="{{URL::route('clientes.mostrar', array('id' => $clientes->id ))}}">
+                        <strong>{{$clientes->empresa}}</strong>
+                    </a>
 				</div>
                         <div class="panel-options">
 
@@ -56,7 +58,7 @@
             			<td>{{$fila->telefono}}</td>
             			<td>{{HTML::mailto($fila->email)}}</td>
             			<td>
-            				<a href="{{URL::route('clientes.eliminar', array('id' => $fila['id'] ))}}" class="btn btn-danger btn-sm btn-icon icon-left">
+            				<a href="{{URL::route('clientes.eliminarcontacto', array('id' => $fila['id'] ))}}" class="btn btn-danger btn-sm btn-icon icon-left">
             				    <i class="entypo-cancel"></i>
             				    Eliminar
             				</a>

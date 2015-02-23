@@ -8397,9 +8397,7 @@ button.close {
 .modal-open {
   overflow: hidden;
 }
-.modal-open .page-container {
-  padding-right: 15px;
-}
+
 .modal {
   display: none;
   overflow: auto;

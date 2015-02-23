@@ -48,7 +48,7 @@
 					<div class="form-group">
                         <label for="field-1" class="col-sm-2 control-label">Cif: </label>
                         <div class="col-sm-3">
-                        {{Form::input("text", "cif", $clientes->cif, array("class" => "form-control", "placeholder"=>"Cif", "id"=>"field-1"))}}
+                        {{Form::input("text", "cif", $clientes->cif, array("class" => "form-control", "maxlength" => "9", "placeholder"=>"Cif", "id"=>"field-1"))}}
                         </div>
                     </div>
 					<div class="form-group">

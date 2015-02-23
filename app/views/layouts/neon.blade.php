@@ -18,7 +18,7 @@
 
 	<link rel="stylesheet" href="/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css"  id="style-resource-1">
     	<link rel="stylesheet" href="/neon/assets/css/font-icons/entypo/css/entypo.css"  id="style-resource-2">
-    	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic"  id="style-resource-3">
+    	<link rel="stylesheet" href="/neon/assets/fonts/googlefont.css"  id="style-resource-3">
     	<link rel="stylesheet" href="/neon/assets/css/bootstrap.css"  id="style-resource-4">
     	<link rel="stylesheet" href="/neon/assets/css/neon.core.min.css"  id="style-resource-5">
     	<link rel="stylesheet" href="/neon/assets/css/neon-core.css"  id="style-resource-9">
@@ -148,10 +148,10 @@ $(document).ready(function(){
         <a href=""><i class="entypo-book-open"></i><span>   Boletines</span></a>
                             <ul>
                 <li>
-                    <a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-search"></i><span>Ver Boletines</span></a>
+                    <a href="{{URL::route('boletin.index')}}"><i class="entypo-search"></i><span>Ver Boletines</span></a>
                 </li>
                 <li>
-                    <a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-plus"></i><span>Subir Boletín</span></a>
+                    <a href="{{URL::route('boletin.crear')}}"><i class="entypo-plus"></i><span>Subir Boletín</span></a>
                 </li>
                 <li>
                     <a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-mail"></i><span>Envío Masivo de Boletines</span></a>
@@ -280,6 +280,27 @@ $(document).ready(function(){
                         <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">No, por favor no lo envies!</button>
                           <button type="submit" class="btn btn-success" onclick="enviarformulario();">Si, Modificar!</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+<!-- Modal 1 (Boletines)-->
+                  <div class="modal fade" id="boletines">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title">¿Me lo puedes confirmar?</h4>
+                        </div>
+                        
+                        <div class="modal-body">
+                          Estás seguro de querer enviar los boletines?
+                        </div>
+                        
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">No, por favor no lo envies!</button>
+                          <button type="submit" class="btn btn-success" onclick="enviarformulario();">Si, Enviar!</button>
                         </div>
                       </div>
                     </div>
