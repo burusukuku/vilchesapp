@@ -1,4 +1,4 @@
-@extends('...layouts.neon')
+@extends('layouts.neon')
 
 
 @section('head')
@@ -49,7 +49,7 @@
                          	</thead>
 
                          	<tbody>
-                         	<?$contactos=Contactos::where('id_cli','=',$clientes->id)->get();?>
+                         	<?php $contactos=Contactos::where('id_cli','=',$clientes->id)->get();?>
             <?php foreach($contactos as $fila): ?>
             		<tr>
             			<td>{{$fila->id}}</td>

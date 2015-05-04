@@ -1,4 +1,4 @@
-@extends('...layouts.neon')
+@extends('layouts.neon')
 
 
 @section('head')
@@ -61,7 +61,7 @@
                      "class" => "form-horizontal",
                     ))}}
 
-                <? $id_cli=$clientes->id;?>
+                <?php $id_cli=$clientes->id;?>
 					<div class="form-group">
 
 					    <label for="field-2" class="col-sm-2 control-label">Cif: </label>
@@ -97,14 +97,14 @@
                      <div class="form-group">
                           <label for="field-5" class="col-sm-2 control-label">Pertenece a: </label>
                           <div class="col-sm-3">
-                          <?
+                          <?php
                             if($clientes->grupo == NULL){ ?>
                             {{Form::input("text", "grupo", "Ningún grupo", array("class" => "form-control","placeholder"=>"Grupo",  "id"=>"field-7",'disabled'))}}
-                           <? }else{
+                           <?php }else{
                              $grupo=Grupo::where('id','=',$clientes->grupo)->select('nombre')->first();
                              ?>
                              {{Form::input("text", "grupo", $grupo->nombre, array("class" => "form-control","placeholder"=>"Grupo",  "id"=>"field-7",'disabled'))}}
-                          <?  }
+                          <?php  }
                           ?>
                           </div>
                      </div>
@@ -264,7 +264,7 @@
                          	</thead>
 
                          	<tbody>
-                         	<?$contactos=Contactos::where('id_cli','=',$id_cli)->get();?>
+                         	<?php $contactos=Contactos::where('id_cli','=',$id_cli)->get();?>
             <?php foreach($contactos as $fila): ?>
             		<tr>
             			<td>{{$fila->id}}</td>
@@ -301,7 +301,7 @@
 
 			<div class="panel-body">
 
-			    <?
+			    <?php
                 $documentos=Documentos::where('idcliente','=',$clientes->id)->get();
                 if(Documentos::where('idcliente','=',$clientes->id)->count() == '0'){
                 echo "No existen documentos.";
@@ -322,12 +322,12 @@
 
 
                                         if($rutabbdd == $archivo && $documento->idcliente == $clientes->id){
-                                        echo "<div class='form-group'>";
+                                        echo "<div class='form-linea'>";
                                         $date = new DateTime($documento->created_at);
                                         $fecha=$date->format('d/m/Y');
 
-                                        echo "<div class='col-sm-6'><strong>Documento:</strong> ".$documento->nombredocumento." <br> <strong>Archivo:</strong> ".$file.  " <br> <strong>Creado: </strong>".$fecha." </div>
-                                        <div class='col-sd-4'>
+                                        echo "<div class='col-md-6'><h3>".$documento->nombredocumento."</h3> <strong>Archivo:</strong> ".$file.  " <br> <strong>Creado: </strong>".$fecha." </div>
+                                        <div class='col-md-6'>
                                        <a href=".URL::route('clientes.descargar', array('id' => $documento->id))." class='btn btn-green btn-sm btn-icon icon-left'>
                                     <i class=entypo-download></i>
                                 Descargar
@@ -353,7 +353,6 @@
 
 	</div>
 </div>
-</div>
 <script type="text/javascript">
 function nuevodocumento() {
     document.getElementById('clientes').style.display = 'none';
@@ -366,6 +365,9 @@ function nuevocontacto() {
     document.getElementById('contactos').style.display = 'none';
     document.getElementById('documentos').style.display = 'none';
     document.getElementById('aniadircontacto').style.display  = 'block';
+}
+function aniadircontacto() {
+    
 }
 function cancelar() {
     document.getElementById('clientes').style.display = 'block';

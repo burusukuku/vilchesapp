@@ -10,5 +10,5 @@
 @section('contenido')
 <div class="titulo" style="text-align: center; font-size: 5em; color: #6c0268">Bienvenido/a</div>
 <br><br>
-<div class="imagenlogo" style="text-align: center;"><img src="/neon/assets/images/logo2.png" /></div>
+<div class="imagenlogo" style="text-align: center;"><img src="./neon/assets/images/logo2.png" /></div>
 @stop

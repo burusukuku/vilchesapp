@@ -30,7 +30,7 @@
              	</thead>
 
              	<tbody>
-             	<?$grupos=Grupo::select('id', 'nombre')->get();?>
+             	<?php $grupos=Grupo::select('id', 'nombre')->get();?>
 <?php foreach($paginacion as $fila): ?>
 		<tr>
 			<td>{{$fila->id}}</td>
@@ -38,9 +38,9 @@
 			<td>{{$fila->empresa}}</td>
 			<td>{{$fila->localidad}}</td>
 			@foreach($grupos as $muestra)
-			   <? if($fila->grupo == $muestra->id){?>
+			   <?php if($fila->grupo == $muestra->id){?>
 			<td>{{$muestra->nombre}}</td>
-			<?}?>
+			<?php }?>
 			@endforeach
 			<td>
 				<a href="{{URL::route('clientes.mostrar', array('id' => $fila['id'] ))}}" class="btn btn-info btn-sm btn-icon icon-left">

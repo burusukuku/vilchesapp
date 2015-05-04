@@ -6,16 +6,16 @@
 
 @yield('head')
 
-	<link rel="stylesheet" href="/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.css"  id="style-resource-1">
-	<link rel="stylesheet" href="/neon/assets/css/font-icons/entypo/css/entypo.css"  id="style-resource-2">
-	<link rel="stylesheet" href="/neon/assets/css/fonts/googlefont.css"  id="style-resource-3">
-	<link rel="stylesheet" href="/neon/assets/css/bootstrap.css"  id="style-resource-4">
-	<link rel="stylesheet" href="/neon/assets/css/neon-core.css"  id="style-resource-5">
-	<link rel="stylesheet" href="/neon/assets/css/neon-theme.css"  id="style-resource-6">
-	<link rel="stylesheet" href="/neon/assets/css/neon-forms.css"  id="style-resource-7">
-	<link rel="stylesheet" href="/neon/assets/css/custom.css"  id="style-resource-8">
+	<link rel="stylesheet" href="./neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.css"  id="style-resource-1">
+	<link rel="stylesheet" href="./neon/assets/css/font-icons/entypo/css/entypo.css"  id="style-resource-2">
+	<link rel="stylesheet" href="./neon/assets/css/fonts/googlefont.css"  id="style-resource-3">
+	<link rel="stylesheet" href="./neon/assets/css/bootstrap.css"  id="style-resource-4">
+	<link rel="stylesheet" href="./neon/assets/css/neon-core.css"  id="style-resource-5">
+	<link rel="stylesheet" href="./neon/assets/css/neon-theme.css"  id="style-resource-6">
+	<link rel="stylesheet" href="./neon/assets/css/neon-forms.css"  id="style-resource-7">
+	<link rel="stylesheet" href="./neon/assets/css/custom.css"  id="style-resource-8">
 
-	<script src="/neon/assets/js/jquery-1.11.0.min.js"></script>
+	<script src="./neon/assets/js/jquery-1.11.0.min.js"></script>
 <script>$.noConflict();</script>
 
 	<!--[if lt IE 9]><script src="/neon/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -40,7 +40,7 @@
 		<div class="login-content">
 
 			<a href="{{URL::route('index')}}" class="logo">
-				<img src="/neon/assets/images/logo2.png" width="240" alt="" />
+				<img src="./neon/assets/images/logo2.png" width="240" alt="" />
 			</a>
 
 			@yield('frase')
@@ -62,18 +62,18 @@
 </div>
 
 
-	<script src="/neon/assets/js/gsap/main-gsap.js" id="script-resource-1"></script>
-	<script src="/neon/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js" id="script-resource-2"></script>
-	<script src="/neon/assets/js/bootstrap.js" id="script-resource-3"></script>
-	<script src="/neon/assets/js/joinable.js" id="script-resource-4"></script>
-	<script src="/neon/assets/js/resizeable.js" id="script-resource-5"></script>
-	<script src="/neon/assets/js/neon-api.js" id="script-resource-6"></script>
-	<script src="/neon/assets/js/cookies.min.js" id="script-resource-7"></script>
-	<script src="/neon/assets/js/jquery.validate.min.js" id="script-resource-8"></script>
-	<script src="/neon/assets/js/neon-login.js" id="script-resource-9"></script>
-	<script src="/neon/assets/js/neon-custom.js" id="script-resource-10"></script>
-	<script src="/neon/assets/js/neon-demo.js" id="script-resource-11"></script>
-	<script src="/neon/assets/js/neon-skins.js" id="script-resource-12"></script>
+	<script src="./neon/assets/js/gsap/main-gsap.js" id="script-resource-1"></script>
+	<script src="./neon/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js" id="script-resource-2"></script>
+	<script src="./neon/assets/js/bootstrap.js" id="script-resource-3"></script>
+	<script src="./neon/assets/js/joinable.js" id="script-resource-4"></script>
+	<script src="./neon/assets/js/resizeable.js" id="script-resource-5"></script>
+	<script src="./neon/assets/js/neon-api.js" id="script-resource-6"></script>
+	<script src="./neon/assets/js/cookies.min.js" id="script-resource-7"></script>
+	<script src="./neon/assets/js/jquery.validate.min.js" id="script-resource-8"></script>
+	<script src="./neon/assets/js/neon-login.js" id="script-resource-9"></script>
+	<script src="./neon/assets/js/neon-custom.js" id="script-resource-10"></script>
+	<script src="./neon/assets/js/neon-demo.js" id="script-resource-11"></script>
+	<script src="./neon/assets/js/neon-skins.js" id="script-resource-12"></script>
 
 
 </body>

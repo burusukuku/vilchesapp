@@ -52,6 +52,23 @@
                 {{Form::file('boletin', ['class' => 'file-input-wrapper btn form-control file2 inline btn btn-primary' , 'data-label'=>'<i class="glyphicon glyphicon-file"></i> Buscar' ]);}}
           </div>
           </div>
+
+          <script type="text/javascript">
+                  jQuery(document).ready(function(){
+                    $('#grupo').change(function(){
+                      $.getJSON("{{ url('grupoaniadidos')}}",
+                      { option: $(this).val() },
+                      function(data) {
+                          var item = $('#cliente');
+                                item.empty();
+                                item.append("<option selected value='*' disabled>Elige un cliente</option>");
+                        $.each(data, function(id, empresa) {
+                          item.append("<option value='" + id + "'>" + empresa + "</option>");
+                        });
+                      });
+                    });
+                  });
+                </script>
           
           <script type="text/javascript">
                   jQuery(document).ready(function(){
@@ -69,22 +86,7 @@
                     });
                   });
                 </script>
-          <script type="text/javascript">
-                  jQuery(document).ready(function(){
-                    $('#grupo').change(function(){
-                      $.getJSON("{{ url('grupoaniadidos')}}",
-                      { option: $(this).val() },
-                      function(data) {
-                          var item = $('#cliente');
-                                item.empty();
-                                item.append("<option selected value='*' disabled>Elige un cliente</option>");
-                        $.each(data, function(id, empresa) {
-                          item.append("<option value='" + id + "'>" + empresa + "</option>");
-                        });
-                      });
-                    });
-                  });
-                </script>
+          
 
           <div class="form-group">
                  <label for="field-5" class="col-md-4 control-label">Seleccionar grupo: </label>
@@ -121,15 +123,25 @@
       </div>
 
       <div class="panel-body">
-                {{Form::open(array(
-                                        "method" => "POST",
-                                        "action" => "BoletinesController@aniadircliente",
-                                        "role" => "form",
                 
-                                        "class" => "form-horizontal",
-                                        "id" => "formulario-modal"
-                                        ))}}
-
+           <script type="text/javascript">
+                  jQuery(document).ready(function(){
+                    $('#aniadir').click(function(){
+                        $.getJSON("{{ url('aniadir')}}",
+                        { 
+                          cliente: $('#cliente').val()
+                         },
+                        function(data) {
+                           var item = $('#resultados');
+                                
+                        $.each(data, function(id, empresa) {
+                          item.html("viva viva <br> ");
+                        });
+                            
+                        });
+                  });
+                  });
+                </script>
           <div class="form-group">
                   <label for="field-5" class="col-md-4 control-label">Seleccionar cliente: </label>
                  <div class="col-md-4">
@@ -139,13 +151,14 @@
                  </select>
                  </div>
                  <div class="col-md-4">
-                            {{Form::input("hidden", "_token", csrf_token())}}
-                            {{Form::input("submit", null, "Añadir cliente", array("class" => "btn btn-default"))}}
-                  </div>
-                 
+               <button type="button" id="aniadir" class="btn btn-default btn-icon icon-left">
+                        Añadir
+                        <i class="entypo-user"></i> </button>
+            </div>
+          </div>       
 
-          {{Form::close()}}
-          </div>
+    <div id="resultados"></div>    
+          
   
           @if( Boletines::where('num_boletin','=','0')->where('id_cli_ani','!=','0')->count() != '0')
           <?php // Los clientes añadidos tendrán en un principio: num_boletin = 0 y id_cli_ani != 0. Y cuando se envie el boletín se les cambiará el num_boletin al número incremental de los envios realizados. ?> 

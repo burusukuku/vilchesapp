@@ -75,8 +75,8 @@ Route::group(array('before' => 'auth_user'), function() {
 
     Route::get('/grupoaniadidos', function(){
         $grupo = Input::get('option');
-        if($grupo= '*'){ //si son todos, no debe añadir ninguno adicional
-            $clientes=0;
+        if($grupo=='*'){ //si son todos, no debe añadir ninguno adicional
+            $clientes=array();
         }else{ // Si elige un grupo, solo añadirá gente que no esté en ese grupo
              $clientes = Clientes::where('grupo', '!=', $grupo)->get();
         }
@@ -89,6 +89,32 @@ Route::group(array('before' => 'auth_user'), function() {
         return Response::json($opciones);
 
     });
+    Route::get('/aniadir', function(){
+       
+        $cliente = Input::get('cliente');
+        
+        //Insertamos el cliente en el boletin
+        $boletin = Boletines::create(array(
+                'id_cli_ani' => $cliente,
+            ));
+        //Sacamos todos los clientes añadidos hasta el momento
+        $registros= Boletines::where('num_boletin','=','0')->where('id_cli_ani','!=','0')->get();
+        //Consultamos la información de cada cliente
+        foreach($registros as $fila){
+        $clientes= Clientes::find($fila->id_cli_ani);
+        }
+
+        $opciones = array();
+        //insertamos la información en el array
+        foreach ($clientes as $cliente) {
+            $opciones += array($cliente->id => $cliente->empresa);
+        }
+        //devolvemos el array
+        return Response::json($opciones);
+
+    });
+
+     
 
     //Rutas para Empresa
     Route::group(array('prefix' => 'empresa'), function() {

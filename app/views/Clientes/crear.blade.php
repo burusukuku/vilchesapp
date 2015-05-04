@@ -1,4 +1,4 @@
-@extends('...layouts.neon')
+@extends('layouts.neon')
 
 
 @section('head')

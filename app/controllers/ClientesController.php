@@ -71,7 +71,7 @@ class ClientesController extends BaseController {
         if ($validator->passes()) {
 
 
-            if(is_numeric ($grupo)==false && $grupo<>0){
+            if($grupo=='*'){
                 Grupo::create(array('nombre'=>Input::get('nuevogrupo')));
                 $grupo=Grupo::all()->last()->id;
             }
@@ -189,7 +189,7 @@ class ClientesController extends BaseController {
                 Event::fire('auditoria', array(($contacto->id), Auth::user()->get()->user, Contactos::find($contacto->id), 'Contactos', 'Baja'));
                 Contactos::find($contacto->id)->delete();
         }
-        Contactos::find($id)->delete();
+        Clientes::find($id)->delete();
 
         return Redirect::action('ClientesController@index');
     }
@@ -197,7 +197,7 @@ class ClientesController extends BaseController {
     public function aniadircontacto()
     {
         $rules = array(
-            'nombre' => 'required|unique_with:contactos_cli,apell1','apell2',
+            'nombre' => 'required|unique_with:contactos_cli,apell1,apell2,telefono',
             "apell1" => "required",
             "apell2" => "required",
             "telefono" => "required",
@@ -205,12 +205,12 @@ class ClientesController extends BaseController {
         );
 
         $messages = array(
-            "nombre.required" => "El campo nombre del documento es requerido",
+            "nombre.required" => "El campo nombre de la persona es requerido",
             "nombre.uniqued" => "La persona ya existe en la base de datos",
-            "apell1.required" => "El archivo a subir es requerido",
-            "apell2.required" => "El archivo ya existe en la base de datos",
-            "telefono.required" => "El archivo a subir es requerido",
-            "email.required" => "El archivo a subir es requerido",
+            "apell1.required" => "El primer apellido es requerido",
+            "apell2.required" => "El segundo apellido es requerido",
+            "telefono.required" => "El teléfono es requerido",
+            "email.required" => "El email es requerido",
         );
 
 

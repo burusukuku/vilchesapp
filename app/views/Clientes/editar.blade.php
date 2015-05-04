@@ -1,4 +1,4 @@
-@extends('...layouts.neon')
+@extends('layouts.neon')
 
 
 @section('head')
@@ -77,11 +77,11 @@
                          <label for="field-5" class="col-sm-2 control-label">Pertenece a: </label>
                          <div class="col-sm-3">
                          <select id="grupo" name="grupo" class="form-control" onchange="activargruponuevo(this);">
-                               <?$grupos= Grupo::select('id','nombre')->get();?>
+                               <?php $grupos= Grupo::select('id','nombre')->get();?>
                                 @foreach($grupos as $mostrar)
-                                   <? if($clientes->grupo == $mostrar->id){?>
+                                   <?php if($clientes->grupo == $mostrar->id){?>
                                    echo "<option value='{{$mostrar->nombre}}' disabled selected>{{$mostrar->nombre}}</option>";
-                                   <?}?>
+                                   <?php}?>
                                 @endforeach
                              <option value='*'>Crear nuevo grupo ----></option>
 

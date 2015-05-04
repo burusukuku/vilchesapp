@@ -50,7 +50,7 @@ $(document).ready(function(){
 	
 
 </head>
-<body class="page-body <? if(Route::currentRouteName()=='index') echo "page-fade"; ?>" >
+<body class="page-body <?php if(Route::currentRouteName()=='index') echo "page-fade"; ?>" >
 
  <?php
  $vista= Route::currentRouteName();
@@ -158,7 +158,7 @@ $(document).ready(function(){
                 </li>
             </ul>
         </li>
-        <?
+        <?php
         $tipo=Auth::user()->get()->tipo;
         if($tipo == 'Administrador'){
         ?>
@@ -176,7 +176,7 @@ $(document).ready(function(){
                     </li>
                 </ul>
             </li>
-            <?
+            <?php
             }
             ?>
 		</ul>
