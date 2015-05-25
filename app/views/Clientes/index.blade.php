@@ -23,7 +23,7 @@
              			<th>Id</th>
              			<th>Cif</th>
              			<th>Empresa</th>
-             			<th>Localidad</th>
+             			<th>Telefono</th>
              			<th>Grupo</th>
              			<th>Acciones</th>
              		</tr>
@@ -36,7 +36,7 @@
 			<td>{{$fila->id}}</td>
 			<td>{{$fila->cif}}</td>
 			<td>{{$fila->empresa}}</td>
-			<td>{{$fila->localidad}}</td>
+			<td>{{$fila->telefono}}</td>
 			@foreach($grupos as $muestra)
 			   <?php if($fila->grupo == $muestra->id){?>
 			<td>{{$muestra->nombre}}</td>

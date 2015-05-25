@@ -74,6 +74,10 @@
                         <div class="col-sm-3">
                         {{Form::input("text", "nombre", $clientes->empresa, array("class" => "form-control", "placeholder"=>"Nombre", "id"=>"field-1", 'disabled'))}}
                         </div>
+                         <label for="field-7" class="col-sm-2 control-label">Teléfono: </label>
+                        <div class="col-sm-3">
+                        {{Form::input("text", "telefono", $clientes->telefono, array("class" => "form-control","placeholder"=>"Teléfono",  "id"=>"field-7",'disabled'))}}
+                        </div>
 
 				    </div>
 
@@ -325,8 +329,10 @@
                                         echo "<div class='form-linea'>";
                                         $date = new DateTime($documento->created_at);
                                         $fecha=$date->format('d/m/Y');
+                                        if(strlen($file)>32)
+                                        $archivo=substr ($file,0,32).'...';
 
-                                        echo "<div class='col-md-6'><h3>".$documento->nombredocumento."</h3> <strong>Archivo:</strong> ".$file.  " <br> <strong>Creado: </strong>".$fecha." </div>
+                                        echo "<div class='col-md-6'><h3>".$documento->nombredocumento."</h3> <strong>Archivo:</strong> ".$archivo.  " <br> <strong>Creado: </strong>".$fecha." </div>
                                         <div class='col-md-6'>
                                        <a href=".URL::route('clientes.descargar', array('id' => $documento->id))." class='btn btn-green btn-sm btn-icon icon-left'>
                                     <i class=entypo-download></i>

@@ -56,6 +56,10 @@
                         <div class="col-sm-3">
                         {{Form::input("text", "empresa", $clientes->empresa, array("class" => "form-control", "placeholder"=>"Empresa", "id"=>"field-2"))}}
                         </div>
+                         <label for="field-6" class="col-sm-1 control-label">Telefono: </label>
+                        <div class="col-sm-3">
+                        {{Form::input("text", "telefono", $clientes->telefono, array("class" => "form-control","placeholder"=>"Teléfono",  "id"=>"field-6"))}}
+                        </div>
                     </div>
                      <div class="form-group">
                         <label for="field-5" class="col-sm-2 control-label">Dirección: </label>
@@ -81,7 +85,7 @@
                                 @foreach($grupos as $mostrar)
                                    <?php if($clientes->grupo == $mostrar->id){?>
                                    echo "<option value='{{$mostrar->nombre}}' disabled selected>{{$mostrar->nombre}}</option>";
-                                   <?php}?>
+                                   <?php }?>
                                 @endforeach
                              <option value='*'>Crear nuevo grupo ----></option>
 

@@ -14,5 +14,5 @@ class Clientes extends Eloquent  {
      *
      * @var array
      */
-    protected $fillable = array('id', 'cif','empresa','direccion','localidad','grupo','observaciones');
+    protected $fillable = array('id', 'cif','empresa','telefono','direccion','localidad','grupo','observaciones');
 }

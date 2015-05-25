@@ -56,6 +56,10 @@
                         <div class="col-md-3">
                         {{Form::input("text", "empresa", null, array("class" => "form-control", "placeholder"=>"Empresa", "id"=>"field-2"))}}
                         </div>
+                        <label for="field-6" class="col-sm-1 control-label">Telefono: </label>
+                         <div class="col-sm-3">
+                         {{Form::input("text", "telefono", null, array("class" => "form-control","placeholder"=>"Teléfono",  "id"=>"field-6"))}}
+                         </div>
                      </div>
 
 				      <div class="form-group">

@@ -79,6 +79,7 @@ class ClientesController extends BaseController {
             $clientes = Clientes::create(array(
                 'cif' => Input::get('cif'),
                 'empresa' => Input::get('empresa'),
+                'telefono' => Input::get('telefono'),
                 'direccion' => Input::get('direccion'),
                 'localidad' => Input::get('localidad'),
                 'grupo' => $grupo,
@@ -100,6 +101,7 @@ class ClientesController extends BaseController {
         $clientes =  Clientes::find($id);
         $clientes->cif = Input::get('cif');
         $clientes->empresa = Input::get('empresa');
+        $clientes->telefono = Input::get('telefono');
         $clientes->direccion = Input::get('direccion');
         $clientes->localidad = Input::get('localidad');
         $clientes->observaciones = Input::get('observaciones');
@@ -198,19 +200,11 @@ class ClientesController extends BaseController {
     {
         $rules = array(
             'nombre' => 'required|unique_with:contactos_cli,apell1,apell2,telefono',
-            "apell1" => "required",
-            "apell2" => "required",
-            "telefono" => "required",
-            "email" => "required",
         );
 
         $messages = array(
             "nombre.required" => "El campo nombre de la persona es requerido",
             "nombre.uniqued" => "La persona ya existe en la base de datos",
-            "apell1.required" => "El primer apellido es requerido",
-            "apell2.required" => "El segundo apellido es requerido",
-            "telefono.required" => "El teléfono es requerido",
-            "email.required" => "El email es requerido",
         );
 
 
