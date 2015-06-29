@@ -184,7 +184,13 @@
     <tr>
       <td>{{$clienteaniadido->cif}}</td>
       <td>{{$clienteaniadido->empresa}}</td>
-      <td>{{Grupo::find($clienteaniadido->grupo)->nombre}}</td>
+      <?php if($clienteaniadido->grupo!='0'){
+      $grupo=Grupo::find($clienteaniadido->grupo);
+      ?>
+      <td>{{$grupo->nombre;}}</td>
+      <?php }else{?>
+      <td>Sin Grupo</td>
+      <?php }?> 
       <td>{{$clienteaniadido->localidad}}</td>
       <td>
         <a href="{{URL::route("boletin.eliminarclienteani", array('id' => $fila['id_cli_ani']))}}" class="btn btn-danger btn-sm btn-icon icon-left">
@@ -246,8 +252,8 @@
                 <tr>
                   <th>Id</th>
                         <th>Nombre</th>
-                        <th>Proporcion</th>
-                        <th>Medida</th>
+                        <th>Grupo</th>
+                        <th>Localidad</th>
                         <th>Eliminar</th>
                 </tr>
               </thead>
@@ -261,7 +267,13 @@
     <tr>
       <td>{{$clienteaniadido->cif}}</td>
       <td>{{$clienteaniadido->empresa}}</td>
-      <td>{{Grupo::find($clienteaniadido->grupo)->nombre}}</td>
+       <?php if($clienteaniadido->grupo!='0'){
+      $grupo=Grupo::find($clienteaniadido->grupo);
+      ?>
+      <td>{{$grupo->nombre;}}</td>
+      <?php }else{?>
+      <td>Sin Grupo</td>
+      <?php }?> 
       <td>{{$clienteaniadido->localidad}}</td>
       <td>
         <a href="{{URL::route("boletin.eliminarclienteexc", array('id' => $fila['id_cli_exc']))}}" class="btn btn-danger btn-sm btn-icon icon-left">

@@ -37,11 +37,16 @@
 			<td>{{$fila->cif}}</td>
 			<td>{{$fila->empresa}}</td>
 			<td>{{$fila->telefono}}</td>
+      <?php if($fila->grupo == "0"){?>
+      <td>Sin Grupo</td>
+      <?php }else{?>
 			@foreach($grupos as $muestra)
 			   <?php if($fila->grupo == $muestra->id){?>
 			<td>{{$muestra->nombre}}</td>
 			<?php }?>
 			@endforeach
+      <?php }?>
+
 			<td>
 				<a href="{{URL::route('clientes.mostrar', array('id' => $fila['id'] ))}}" class="btn btn-info btn-sm btn-icon icon-left">
 					<i class="entypo-info"></i>

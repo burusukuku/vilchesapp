@@ -102,7 +102,7 @@
                           <label for="field-5" class="col-sm-2 control-label">Pertenece a: </label>
                           <div class="col-sm-3">
                           <?php
-                            if($clientes->grupo == NULL){ ?>
+                            if($clientes->grupo == '0'){ ?>
                             {{Form::input("text", "grupo", "Ningún grupo", array("class" => "form-control","placeholder"=>"Grupo",  "id"=>"field-7",'disabled'))}}
                            <?php }else{
                              $grupo=Grupo::where('id','=',$clientes->grupo)->select('nombre')->first();

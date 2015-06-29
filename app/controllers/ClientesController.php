@@ -10,6 +10,7 @@ class ClientesController extends BaseController {
         return View::make('clientes.index', array('paginacion' => $paginacion));
     }
 
+
     public function crear()
     {
         return View::make('clientes.crear');

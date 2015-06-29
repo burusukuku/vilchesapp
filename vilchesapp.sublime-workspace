@@ -107,9 +107,9 @@
 	],
 	"file_history":
 	[
-		"/Applications/MAMP/htdocs/vilchesapp/app/views/layouts/neon.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/clientes/index.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/controllers/ClientesController.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/views/layouts/neon.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/clientes/mostrar.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/clientes/editar.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/funciones/Funciones.php",

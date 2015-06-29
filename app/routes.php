@@ -52,8 +52,14 @@ Route::group(array('before' => 'auth_user'), function() {
         Route::post('/aniadircliente', array('as' => 'boletin.aniadircliente', 'uses' => 'BoletinesController@aniadircliente'));
         Route::post('/aniadirclienteexc', array('as' => 'boletin.aniadirclienteexc', 'uses' => 'BoletinesController@aniadirclienteexc'));
         Route::get('/eliminarclienteexc/{id}', array('as' => 'boletin.eliminarclienteexc', 'uses' => 'BoletinesController@eliminarclienteexc'));
+    });
 
-
+    //Rutas para Configuracion
+    Route::group(array('prefix' => 'configuracion'), function() {
+        Route::get('/', array('as' => 'configuracion.index', 'uses' => 'ConfiguracionController@index'));
+        Route::get('/editarcorreo', array('as' => 'configuracion.editarcorreo', 'uses' => 'ConfiguracionController@editarcorreo'));
+        Route::post('/actualizarcorreo', array('as' => 'configuracion.actualizarcorreo', 'uses' => 'ConfiguracionController@actualizarcorreo'));
+        Route::post('/envioprueba', array('as' => 'configuracion.envioprueba', 'uses' => 'ConfiguracionController@envioprueba'));
     });
 
     Route::get('/grupoexcluidos', function(){

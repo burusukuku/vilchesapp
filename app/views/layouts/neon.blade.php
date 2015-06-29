@@ -168,8 +168,8 @@ $(document).ready(function(){
                     <li>
                         <a href="{{URL::route('empresa.index')}}"><i class="entypo-doc-text"></i><span>Datos de Empresa</span></a>
                     </li>
-                    <li>
-                        <a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-mail"></i><span>Configurar Correo</span></a>
+                     <li>
+                        <a href="{{URL::route('configuracion.index')}}"><i class="entypo-mail"></i><span>Datos configuración</span></a>
                     </li>
                     <li>
                         <a href="{{URL::route('usuarios.index')}}"><i class="entypo-users"></i><span>Usuarios</span>   <i class="entypo-lock"></i></a>

@@ -1,5 +1,5 @@
 <?php
-
+$configuracion =  Configuracion::first();
 return array(
 
     /*
@@ -28,7 +28,7 @@ return array(
     |
     */
 
-    'host' => 'smtp.gmail.com',
+    'host' => $configuracion->host,
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return array(
     |
     */
 
-    'port' => 587,
+    'port' => $configuracion->puerto,
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
     |
     */
 
-    'from' => array('address' => 'josema.rulez@gmail.com', 'name' => 'Laravel'),
+    'from' => array('address' => $configuracion->email, 'name' => $configuracion->remitente),
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
     |
     */
 
-    'username' => 'josema.rulez@gmail.com',
+    'username' => $configuracion->usuario,
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
     |
     */
 
-    'password' => 'akmpkdbardhqdnsj',
+    'password' => $configuracion->password,
 
     /*
     |--------------------------------------------------------------------------
