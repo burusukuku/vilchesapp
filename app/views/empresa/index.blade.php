@@ -14,7 +14,7 @@
 
 @section('contenido')
 <div class="row">
-	<div class="col-md-12">
+  <div class="col-md-12">
 @if(Session::has('exito'))
     <div class="exito mensajes">{{ Session::get('exito') }}
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -32,18 +32,18 @@
     </div>
  @endif
 <div class="panel panel-primary" data-collapsed="0">
-			<div class="panel-heading">
-				<div class="panel-title">
-					Mostrando empresa: {{$empresa->nombre}}
-				</div>
-				<div class="panel-options">
+      <div class="panel-heading">
+        <div class="panel-title">
+          Mostrando empresa: {{$empresa->nombre}}
+        </div>
+        <div class="panel-options">
                     <a href="{{URL::route('empresa.editar')}}" class="btn btn-default btn-sm btn-icon icon-left">
                           <i class="entypo-pencil"></i>Editar
                     </a>
         </div>
-			</div>
+      </div>
 
-			<div class="panel-body">
+      <div class="panel-body">
                 {{Form::open(array(
                                         "role" => "form",
                                         "class" => "form-horizontal",
@@ -52,7 +52,11 @@
 
                     <div class="form-group">
                       <div class="col-md-4">
-                          <img src="http://placehold.it/200x150" alt="...">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                           <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;" data-trigger="fileinput">
+                             <img src="/fotos/empresa/{{$empresa->logo}}" alt="...">
+                           </div>
+                        </div>
                       </div>
                     </div>
           <div class="form-group">
@@ -61,12 +65,12 @@
             {{Form::input("text", "cif", $empresa->cif, array("class" => "form-control", "placeholder"=>"Tipo", "id"=>"field-2", "disabled"=>"true"))}}
                 </div>
             </div>
-					<div class="form-group">
-						<label for="field-1" class="col-md-4 control-label">Nombre: </label>
-						<div class="col-md-4">
-				        {{Form::input("text", "nombre", $empresa->nombre, array("class" => "form-control", "placeholder"=>"Nombre", "id"=>"field-1", "disabled"=>"true"))}}
-						</div>
-					</div>
+          <div class="form-group">
+            <label for="field-1" class="col-md-4 control-label">Nombre: </label>
+            <div class="col-md-4">
+                {{Form::input("text", "nombre", $empresa->nombre, array("class" => "form-control", "placeholder"=>"Nombre", "id"=>"field-1", "disabled"=>"true"))}}
+            </div>
+          </div>
           <div class="form-group">
             <label for="field-1" class="col-md-4 control-label">Email: </label>
             <div class="col-md-4">
@@ -103,15 +107,15 @@
                 {{Form::input("text", "telefono", $empresa->telefono, array("class" => "form-control", "placeholder"=>"Nombre", "id"=>"field-1", "disabled"=>"true"))}}
             </div>
           </div>
-					{{Form::close()}}
-				</form>
+          {{Form::close()}}
+        </form>
 
-			</div>
+      </div>
 
-		</div>
+    </div>
 
-	</div>
-	</div>
+  </div>
+  </div>
 @stop
 
 

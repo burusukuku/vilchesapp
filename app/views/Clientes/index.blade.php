@@ -37,7 +37,7 @@
 			<td>{{$fila->cif}}</td>
 			<td>{{$fila->empresa}}</td>
 			<td>{{$fila->telefono}}</td>
-      <?php if($fila->grupo == "0"){?>
+      <?php if($fila->grupo == "0" || $fila->grupo == NULL){?>
       <td>Sin Grupo</td>
       <?php }else{?>
 			@foreach($grupos as $muestra)

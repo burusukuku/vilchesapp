@@ -47,6 +47,30 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "app/views/layouts/neon.blade.php",
+			"settings":
+			{
+				"buffer_size": 13997,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/empresa/editar.blade.php",
+			"settings":
+			{
+				"buffer_size": 6526,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/empresa/index.blade.php",
+			"settings":
+			{
+				"buffer_size": 5200,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -99,18 +123,29 @@
 		"/Applications/MAMP/htdocs/vilchesapp",
 		"/Applications/MAMP/htdocs/vilchesapp/app",
 		"/Applications/MAMP/htdocs/vilchesapp/app/controllers",
-		"/Applications/MAMP/htdocs/vilchesapp/app/funciones",
-		"/Applications/MAMP/htdocs/vilchesapp/app/models",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views",
+		"/Applications/MAMP/htdocs/vilchesapp/app/views/boletin",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/clientes",
+		"/Applications/MAMP/htdocs/vilchesapp/app/views/configuracion",
+		"/Applications/MAMP/htdocs/vilchesapp/app/views/emails",
+		"/Applications/MAMP/htdocs/vilchesapp/app/views/empresa",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/layouts"
 	],
 	"file_history":
 	[
-		"/Applications/MAMP/htdocs/vilchesapp/app/views/clientes/index.blade.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/views/empresa/editar.blade.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/controllers/EmpresaController.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/controllers/ClientesController.php",
-		"/Applications/MAMP/htdocs/vilchesapp/app/views/layouts/neon.blade.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/views/clientes/index.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/clientes/mostrar.blade.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/config/mail.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/views/emails/prueba.blade.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/views/boletin/crear.blade.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/views/layouts/neon.blade.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/routes.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/views/configuracion/index.blade.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/controllers/ConfiguracionController.php",
+		"/Applications/MAMP/htdocs/vilchesapp/app/models/Clientesold.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/clientes/editar.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/funciones/Funciones.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/models/Clientes.php",
@@ -120,14 +155,11 @@
 		"/Applications/MAMP/htdocs/vilchesapp/vilchesapp.sublime-project",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/Home/index.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/layouts/neonlogin.blade.php",
-		"/Applications/MAMP/htdocs/vilchesapp/app/routes.php",
-		"/Applications/MAMP/htdocs/vilchesapp/app/views/boletin/crear.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/controllers/BoletinesController.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/boletin/index.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/emails/boletin.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/models/Boletines.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/controllers/UsuariosController.php",
-		"/Applications/MAMP/htdocs/vilchesapp/app/config/mail.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/boletines/index.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/boletines/crear.blade.php",
 		"/Applications/MAMP/htdocs/vilchesapp/app/views/Clientes/mostrar.blade.php",
@@ -177,8 +209,99 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "app/views/layouts/neon.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13997,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13481,
+								13481
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5012.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/views/empresa/editar.blade.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 6526,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 355.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views/empresa/index.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5200,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5200,
+								5200
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 919.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],

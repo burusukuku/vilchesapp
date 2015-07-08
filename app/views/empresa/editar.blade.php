@@ -34,12 +34,9 @@
 <div class="panel panel-primary" data-collapsed="0">
             <div class="panel-heading">
                 <div class="panel-title">
-                    Mostrando empresa: {{$empresa->nombre}}
+                    Editando empresa: {{$empresa->nombre}}
                 </div>
                 <div class="panel-options">
-                    <a href="{{URL::route('empresa.editar', array('id' => $empresa->id))}}" class="btn btn-default btn-sm btn-icon icon-left">
-                          <i class="entypo-pencil"></i>Editar
-                    </a>
         </div>
             </div>
 
@@ -47,15 +44,31 @@
                 {{Form::open(array(
                                         "method" => "POST",
                                         "action" => "EmpresaController@actualizar",
+                                        "files" => true,
                                         "role" => "form",
                                         "class" => "form-horizontal",
                                         "id" =>"formulario-modal"
                                         ))}}
 
                     <div class="form-group">
-                      <div class="col-md-4">
-                          <img src="http://placehold.it/200x150" alt="...">
-                      </div>
+                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <input type="hidden" value="" name="...">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;" data-trigger="fileinput">
+                            @if($empresa->foto!="")
+                            <img src="/fotos/empresa/{{$empresa->id .'/'. $empresa->foto}}" alt="...">
+                            @else
+                                <img src="http://placehold.it/200x150" alt="...">
+                            @endif
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 6px;"></div>
+                            <div>
+                                <span class="btn btn-white btn-file">
+                                <span class="fileinput-new">Selecciona una foto</span>
+                                <span class="fileinput-exists">Cambiar</span>
+                                <input type="file" name="foto" accept="image/*"> </span>
+                                <a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Borrar</a>
+                            </div>
+                        </div>
                     </div>
           <div class="form-group">
                 <label for="field-2" class="col-md-4 control-label">Cif: </label>

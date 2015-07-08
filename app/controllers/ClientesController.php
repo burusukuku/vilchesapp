@@ -292,7 +292,12 @@ class ClientesController extends BaseController {
             $html.= '<td>'. $fila['cif'] .'</td>';
             $html.= '<td>'. $fila['empresa'] .'</td>';
             $html.= '<td>'. $fila['localidad'] .'</td>';
-            $html.= '<td>'. Grupo::find($fila['grupo'])->nombre .'</td>';
+            $grupo=$fila['grupo'];
+            if($grupo == '0' || $grupo ==NULL){
+                 $html.= '<td>Sin Grupo</td>';
+            }else{
+                $html.= '<td>'. Grupo::find($fila['grupo'])->nombre .'</td>';
+            }
             $html.= '</tr>';
         }
 

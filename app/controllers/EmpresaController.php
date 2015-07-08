@@ -21,6 +21,14 @@ class EmpresaController extends BaseController {
 
     public function actualizar()
     {
+        $id = Input::get('id');
+
+        if(Input::file("foto")!=""){
+            $file=Input::file("foto");
+            $nombre=$file->getClientOriginalName();
+            $file->move("fotos/empresa/",$file->getClientOriginalName());
+         }
+
         $rules = array(
             "cif" => "required",
             "nombre"=>"required",
@@ -62,11 +70,12 @@ class EmpresaController extends BaseController {
         $empresa->provincia = Input::get('provincia');
         $empresa->cp = Input::get('cp');
         $empresa->telefono = Input::get('telefono');
+        $empresa->logo = $nombre;
 
 
         $empresa->save();
 
-        Event::fire('auditoria', array($empresa->id, Auth::user()->get()->user, Empresa::first(), 'Empresa', 'Modificacion'));
+        Event::fire('auditoria', array($empresa->id, Auth::user()->get()->user, Empresa::first(), 'empresa', 'Modificacion'));
 
         $empresa =  Empresa::first();
 
@@ -75,6 +84,7 @@ class EmpresaController extends BaseController {
             return Redirect::back()->withinput()->withErrors($validator);
         }
     }   
+
 
 }
 
