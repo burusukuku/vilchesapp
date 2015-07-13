@@ -59,15 +59,7 @@
 
 
 {{Form::close()}}
-<div class="login-bottom-links">
 
-				<a href="{{URL::route('recoverpassword')}}" class="link">Olvidó su contraseña?</a>
-
-				<br />
-
-				<a href="#">ToS</a>  - <a href="#">Politica de privacidad</a>
-
-			</div>
 </div>
 @stop
 

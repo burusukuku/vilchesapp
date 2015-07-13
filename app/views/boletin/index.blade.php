@@ -31,7 +31,11 @@
 <?php foreach($paginacion as $fila): ?>
 		<tr>
 			<td>{{$fila->id}}</td>
-			<td>{{$fila->ruta}}</td>
+      <?php 
+      $nombre=explode(".",$fila->ruta);?>
+			<td><a href=<?php echo 'boletines/'.$fila->ruta;?> target="_blank">{{$fila->ruta}}</a><?php if (file_exists('boletines/errores/'.$nombre[0].'.txt')) {?>
+            <a href=<?php echo 'boletines/errores/'.$nombre[0].'.txt'?> target="_blank"> <i class="entypo-attention">Ver errores</i></a>
+       <?php }?></td>
       @if($fila->grupo<1)
         <td>Todos</td>
         @else
@@ -78,7 +82,7 @@ tableContainer.dataTable({
 "sPaginationType": "bootstrap",
 "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todo"]],
 "bStateSave": false,
-"aaSorting":[[1,"asc"]],
+"aaSorting":[],
 "aoColumns": [
             			null,
             			null,

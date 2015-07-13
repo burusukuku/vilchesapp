@@ -69,7 +69,6 @@ $(document).ready(function(){
                     'clientes.crear' => '',
                     'boletines.index' => '',
                     'boletines.subir' => '',
-                    'boletines.enviar' => '',
                     'configuracion.empresa' => '',
                     'configuracion.correo' => '',
                 );
@@ -153,9 +152,6 @@ $(document).ready(function(){
                 <li>
                     <a href="{{URL::route('boletin.crear')}}"><i class="entypo-plus"></i><span>Subir Boletín</span></a>
                 </li>
-                <li>
-                    <a href="http://demo.neontheme.com/layouts/layout-api/"><i class="entypo-mail"></i><span>Envío Masivo de Boletines</span></a>
-                </li>
             </ul>
         </li>
         <?php
@@ -163,7 +159,7 @@ $(document).ready(function(){
         if($tipo == 'Administrador'){
         ?>
         <li class="<? echo $secciones['configuracion']; ?>">
-            <a href="http://demo.neontheme.com/dashboard/main/"><i class="entypo-tools"></i><span>Configuración</span></a>
+            <a href=""><i class="entypo-tools"></i><span>Configuración</span></a>
                 <ul>
                     <li>
                         <a href="{{URL::route('empresa.index')}}"><i class="entypo-doc-text"></i><span>Datos de Empresa</span></a>

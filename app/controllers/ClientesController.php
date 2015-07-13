@@ -73,7 +73,7 @@ class ClientesController extends BaseController {
 
 
             if($grupo=='*'){
-                Grupo::create(array('nombre'=>Input::get('nuevogrupo')));
+                $grupo=Grupo::create(array('nombre'=>Input::get('nuevogrupo')));
                 $grupo=Grupo::all()->last()->id;
             }
 
@@ -98,6 +98,7 @@ class ClientesController extends BaseController {
 
     public function actualizar()
     {
+
         $id = Input::get('id');
         $clientes =  Clientes::find($id);
         $clientes->cif = Input::get('cif');
@@ -110,6 +111,10 @@ class ClientesController extends BaseController {
         $grupo=Input::get('grupo');
         if($grupo!='') //Si se ha cambiado grupo
         {
+            if($grupo=='*'){
+                $grupo=Grupo::create(array('nombre'=>Input::get('nuevogrupo')));
+                $grupo=Grupo::all()->last()->id;
+            }
         $clientes->grupo = $grupo;
         }
 

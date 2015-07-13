@@ -53,22 +53,7 @@
           </div>
           </div>
 
-          <script type="text/javascript">
-                  jQuery(document).ready(function(){
-                    $('#grupo').change(function(){
-                      $.getJSON("{{ url('grupoaniadidos')}}",
-                      { option: $(this).val() },
-                      function(data) {
-                          var item = $('#cliente');
-                                item.empty();
-                                item.append("<option selected value='*' disabled>Elige un cliente</option>");
-                        $.each(data, function(id, empresa) {
-                          item.append("<option value='" + id + "'>" + empresa + "</option>");
-                        });
-                      });
-                    });
-                  });
-                </script>
+          
           
           <script type="text/javascript">
                   jQuery(document).ready(function(){
@@ -110,106 +95,6 @@
       
 					
 			</div>
-
-
-<div class="row">
-  <div class="col-md-12">
-<div class="panel panel-primary" data-collapsed="0">
-
-      <div class="panel-heading">
-        <div class="panel-title">
-        <i class="entypo-plus-circled"></i>  Enviar también a: 
-        </div>
-      </div>
-
-      <div class="panel-body">
-                
-           <script type="text/javascript">
-                  jQuery(document).ready(function(){
-                    $('#aniadir').click(function(){
-                        $.getJSON("{{ url('aniadir')}}",
-                        { 
-                          cliente: $('#cliente').val()
-                         },
-                        function(data) {
-                           var item = $('#resultados');
-                                
-                        $.each(data, function(id, empresa) {
-                          item.html("viva viva <br> ");
-                        });
-                            
-                        });
-                  });
-                  });
-                </script>
-          <div class="form-group">
-                  <label for="field-5" class="col-md-4 control-label">Seleccionar cliente: </label>
-                 <div class="col-md-4">
-                 <select id="cliente" name="cliente" class="form-control">
-                 <option selected disabled>Elige un cliente</option>
-                      
-                 </select>
-                 </div>
-                 <div class="col-md-4">
-               <button type="button" id="aniadir" class="btn btn-default btn-icon icon-left">
-                        Añadir
-                        <i class="entypo-user"></i> </button>
-            </div>
-          </div>       
-
-    <div id="resultados"></div>    
-          
-  
-          @if( Boletines::where('num_boletin','=','0')->where('id_cli_ani','!=','0')->count() != '0')
-          <?php // Los clientes añadidos tendrán en un principio: num_boletin = 0 y id_cli_ani != 0. Y cuando se envie el boletín se les cambiará el num_boletin al número incremental de los envios realizados. ?> 
-
-  <table class="table table-bordered datatable" id="table-3" aria-describedby="table-3_info" >
-              <thead>
-                <tr>
-                  <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Proporcion</th>
-                        <th>Medida</th>
-                        <th>Eliminar</th>
-                </tr>
-              </thead>
-
-              <tbody>
-              <?
-              $registros= Boletines::where('num_boletin','=','0')->where('id_cli_ani','!=','0')->get();
-              ?>
-
-        @foreach($registros as $fila)
-        <?$clienteaniadido= Clientes::find($fila->id_cli_ani);?>
-    <tr>
-      <td>{{$clienteaniadido->cif}}</td>
-      <td>{{$clienteaniadido->empresa}}</td>
-      <?php if($clienteaniadido->grupo!='0'){
-      $grupo=Grupo::find($clienteaniadido->grupo);
-      ?>
-      <td>{{$grupo->nombre;}}</td>
-      <?php }else{?>
-      <td>Sin Grupo</td>
-      <?php }?> 
-      <td>{{$clienteaniadido->localidad}}</td>
-      <td>
-        <a href="{{URL::route("boletin.eliminarclienteani", array('id' => $fila['id_cli_ani']))}}" class="btn btn-danger btn-sm btn-icon icon-left">
-          <i class="entypo-cancel"></i>
-          Dejar de enviar
-        </a>
-      </td>
-    </tr>
-      @endforeach
-  </tbody>
-</table>
-@endif
-          
-      </div>
-
-    </div>
-
-  </div>
-</div>
 
 <div class="row">
   <div class="col-md-12">
@@ -259,10 +144,10 @@
               </thead>
 
               <tbody>
-              <?
-              $registros= Boletines::where('num_boletin','=','0')->where('id_cli_exc','!=','0')->get();?>
+              <?php
+              $registros = Boletines::where('num_boletin','=','0')->where('id_cli_exc','!=','0')->get();?>
         @foreach($registros as $fila)
-        <?
+        <?php
         $clienteaniadido= Clientes::find($fila->id_cli_exc);?>
     <tr>
       <td>{{$clienteaniadido->cif}}</td>

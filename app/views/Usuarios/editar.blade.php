@@ -57,7 +57,7 @@
 						</div>
 
 				    </div>
-            <? if(Auth::user()->get()->id!=$usuarios->id){?>
+            <?php if(Auth::user()->get()->id!=$usuarios->id){?>
 				    <div class="form-group">
 				    <label for="field-2" class="col-md-4 control-label">Tipo: </label>
                         <div class="col-md-4">
@@ -73,15 +73,15 @@
                         <label class="col-md-4 control-label">Activo</label>
                             <div class="col-md-4">
                                 <div class="make-switch" data-text-label="<i class='entypo-user'></i>">
-                                <? if($usuarios->activo=='1'){?>
+                                <?php if($usuarios->activo=='1'){?>
                                 {{Form::checkbox("activo", '1', true )}}
-                                <?}else{?>
+                                <?php }else{?>
 				                        {{Form::checkbox("activo", '1', false)}}
-                                 <?}?>
+                                 <?php }?>
                                 </div>
                             </div>
 					</div>
-					<? } ?>
+					<?php } ?>
 					<div class="form-group">
 						<div class="col-sm-offset-5 col-sm-5">
 						    {{Form::input("hidden", "_token", csrf_token())}}

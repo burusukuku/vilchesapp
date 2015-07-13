@@ -12,8 +12,7 @@ class ConfiguracionController extends BaseController {
 
     public function editarcorreo()
     {
-
-        
+        $configuracion =  Configuracion::first();
         return View::make('configuracion.editarcorreo', array('configuracion' => $configuracion));
     }
 

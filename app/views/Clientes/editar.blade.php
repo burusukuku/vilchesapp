@@ -81,7 +81,11 @@
                          <label for="field-5" class="col-sm-2 control-label">Pertenece a: </label>
                          <div class="col-sm-3">
                          <select id="grupo" name="grupo" class="form-control" onchange="activargruponuevo(this);">
-                               <?php $grupos= Grupo::select('id','nombre')->get();?>
+                               <?php 
+                               if($clientes->grupo == "0" || $clientes->grupo == NULL){?>
+                                 <option selected disbaled value='0'>Sin Grupo</option>
+                               <?php }
+                               $grupos= Grupo::select('id','nombre')->get();?>
                                 @foreach($grupos as $mostrar)
                                    <?php if($clientes->grupo == $mostrar->id){?>
                                    echo "<option value='{{$mostrar->nombre}}' disabled selected>{{$mostrar->nombre}}</option>";
@@ -97,7 +101,7 @@
                          </select>
                          </div>
                          <div class="col-sm-3">
-                         {{Form::input("text", "nuevogrupo", null, array("class" => "form-control","placeholder"=>"Nuevo grupo",  "id"=>"nuevogrupo", "disabled"=>true))}}
+                         {{Form::input("text", "nuevogrupo", null, array("class" => "form-control","placeholder"=>"Nuevo grupo",  "id"=>"nuevogrupo"))}}
                          </div>
                       </div>
 

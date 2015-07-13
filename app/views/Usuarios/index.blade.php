@@ -15,7 +15,7 @@
 @section('contenido')
 <div class="row">
 <div class="col-xs-6 col-left"><h3>Ver Usuarios</h3></div>
-<div class="col-xs-6 col-right"><p class="text-right"><a href="" class="btn btn-red" target="_blank"><i class="entypo-download"></i> Descargar en PDF</a></p></div><br><br>
+<div class="col-xs-6 col-right"></div><br><br>
 </div>
 @if(Session::has('exito'))
             <div class="exito mensajes">{{ Session::get('exito') }}</div>
@@ -38,7 +38,7 @@
 			<td>{{$fila->id}}</td>
 			<td>{{$fila->user}}</td>
 			<td>{{$fila->email}}</td>
-			<td><? if($fila->activo==1){echo 'Si';}else{echo 'No';}?></td>
+			<td><?php if($fila->activo==1){echo 'Si';}else{echo 'No';}?></td>
 			<td>{{$fila->tipo}}</td>
 			<td>
 				{{-- Editar --}}
